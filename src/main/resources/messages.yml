@@ -54,6 +54,9 @@ hunt-started:
 hunt-started-log:
   text: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ʜᴜɴᴛ ꜱᴛᴀʀᴛᴇᴅ: <hunt>"
   display: chat
+hunt-ended-log:
+  text: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ʜᴜɴᴛ ᴇɴᴅᴇᴅ: <hunt>"
+  display: chat
 hunt-ended:
   text: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <hunt> <#f2ebd7>ʜᴀꜱ ᴇɴᴅᴇᴅ. ᴛʜᴀɴᴋꜱ ꜰᴏʀ ʜᴜɴᴛɪɴɢ!"
   display: chat
@@ -553,8 +556,8 @@ commands:
   not-active: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <hunt> <#C27B6B>ɪꜱɴ'ᴛ ʀᴜɴɴɪɴɢ<#f2ebd7>."
   no-heads: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <hunt> <#C27B6B>ʜᴀꜱ ɴᴏ ʜᴇᴀᴅꜱ<#f2ebd7> ᴛᴏ ꜱᴛᴀʀᴛ ᴡɪᴛʜ."
   choose-run-console: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴛʜɪꜱ ʜᴜɴᴛ ʜᴀꜱ ʀᴜɴ ʙᴇꜰᴏʀᴇ. ᴜꜱᴇ /headhunt start <hunt_id> new ᴏʀ continue."
-  started-new: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <hunt> <#8FAA87>ꜱᴛᴀʀᴛᴇᴅ<#f2ebd7> ᴡɪᴛʜ ᴀ ɴᴇᴡ ʀᴜɴ: <#B8E6D5><total> <#f2ebd7>ʜᴇᴀᴅꜱ."
-  started-continued: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <hunt> <#8FAA87>ꜱᴛᴀʀᴛᴇᴅ<#f2ebd7>, ᴄᴏɴᴛɪɴᴜɪɴɢ ᴛʜᴇ ʟᴀꜱᴛ ʀᴜɴ: <#B8E6D5><total> <#f2ebd7>ʜᴇᴀᴅꜱ."
+  started-new: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <hunt> <#8FAA87>ꜱᴛᴀʀᴛᴇᴅ<#f2ebd7> ᴡɪᴛʜ ᴀ ɴᴇᴡ ʀᴜɴ: <#B8E6D5><total> <#f2ebd7>ʜᴇᴀᴅꜱ, <#D89B6A><blocked> ʙʟᴏᴄᴋᴇᴅ<#f2ebd7>. <click:run_command:'/headhunt conflicts {hunt_id}'><#FCD472>[ᴠɪᴇᴡ ʙʟᴏᴄᴋᴇᴅ]</click>"
+  started-continued: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <hunt> <#8FAA87>ꜱᴛᴀʀᴛᴇᴅ<#f2ebd7>, ᴄᴏɴᴛɪɴᴜɪɴɢ ᴛʜᴇ ʟᴀꜱᴛ ʀᴜɴ: <#B8E6D5><total> <#f2ebd7>ʜᴇᴀᴅꜱ, <#D89B6A><blocked> ʙʟᴏᴄᴋᴇᴅ<#f2ebd7>. <click:run_command:'/headhunt conflicts {hunt_id}'><#FCD472>[ᴠɪᴇᴡ ʙʟᴏᴄᴋᴇᴅ]</click>"
   start-scheduled: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <hunt> <#f2ebd7>ꜱᴛᴀʀᴛꜱ <#FCD472><time> <#6C757D>(ɪɴ <countdown>)"
   end-scheduled: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <hunt> <#f2ebd7>ᴇɴᴅꜱ <#FCD472><time> <#6C757D>(ɪɴ <countdown>)"
   ended: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <hunt> <#C27B6B>ᴇɴᴅᴇᴅ<#f2ebd7>. ʜᴇᴀᴅꜱ ʀᴇᴍᴏᴠᴇᴅ, ᴘʀᴏɢʀᴇꜱꜱ ᴋᴇᴘᴛ."

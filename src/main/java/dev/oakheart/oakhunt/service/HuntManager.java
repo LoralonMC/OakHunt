@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.regex.Pattern;
 
 /**
@@ -161,12 +162,13 @@ public class HuntManager {
 
     /**
      * @param newRun start a fresh run (fresh progress) rather than reopening the last one
+     * @return the number of blocked heads once every head chunk has been synced
      */
-    public void start(Hunt hunt, boolean newRun, String actor) {
-        if (hunt.isActive()) return;
+    public CompletableFuture<Integer> start(Hunt hunt, boolean newRun, String actor) {
+        if (hunt.isActive()) return CompletableFuture.completedFuture(0);
         Optional<Run> last = lastRun(hunt);
         Run run;
-        if (!newRun && last.isPresent()) {
+        if (!newRun && last.isPresent() && !last.get().isImported()) {
             run = last.get();
             run.setEndedAt(null);
         } else {
@@ -180,13 +182,14 @@ public class HuntManager {
         hunt.setStartContinues(false);
         db.saveHunt(hunt);
         plugin.getProgressService().openRun(run);
-        plugin.getWorldSync().applyHunt(hunt);
+        CompletableFuture<Integer> synced = plugin.getWorldSync().syncHunt(hunt);
         plugin.getEditorService().refreshHunt(hunt);
         db.audit(actor, hunt.getId(), "start", "run " + run.getNumber() + (newRun ? " (new)" : " (continued)"));
         plugin.getMessages().send(Bukkit.getConsoleSender(), "hunt-started-log", Messages.hunt(hunt));
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.hasPermission("oakhunt.use")) plugin.getMessages().send(player, "hunt-started", Messages.hunt(hunt));
         }
+        return synced;
     }
 
     public void end(Hunt hunt, String actor) {
@@ -198,15 +201,16 @@ public class HuntManager {
         hunt.setActive(false);
         hunt.setEndAt(null);
         db.saveHunt(hunt);
-        plugin.getWorldSync().applyHunt(hunt);
         for (Head head : heads(hunt)) {
             if (head.isConflict()) {
                 head.setConflict(false);
                 db.saveHead(head);
             }
         }
+        plugin.getWorldSync().syncHunt(hunt);
         plugin.getEditorService().refreshHunt(hunt);
         db.audit(actor, hunt.getId(), "end", null);
+        plugin.getMessages().send(Bukkit.getConsoleSender(), "hunt-ended-log", Messages.hunt(hunt));
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.hasPermission("oakhunt.use")) plugin.getMessages().send(player, "hunt-ended", Messages.hunt(hunt));
         }

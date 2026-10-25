@@ -36,7 +36,8 @@ public class HuntActions {
             plugin.getMessages().cmd(sender, "no-heads", Messages.hunt(hunt));
             return;
         }
-        boolean hasRun = plugin.getHuntManager().lastRun(hunt).isPresent();
+        // An imported run has results but no per-head finds, so it can't be continued.
+        boolean hasRun = plugin.getHuntManager().lastRun(hunt).filter(run -> !run.isImported()).isPresent();
         if (newRun == null && hasRun) {
             if (sender instanceof Player player) {
                 plugin.getMenus().choose(player, "choose-run",
@@ -54,9 +55,11 @@ public class HuntActions {
                     Messages.text("countdown", TimeUtil.formatDuration(at - System.currentTimeMillis())));
             return;
         }
-        plugin.getHuntManager().start(hunt, fresh, sender.getName());
-        plugin.getMessages().cmd(sender, fresh ? "started-new" : "started-continued", Messages.hunt(hunt),
-                Messages.text("total", plugin.getHuntManager().liveTotal(hunt)));
+        plugin.getHuntManager().start(hunt, fresh, sender.getName()).thenAccept(blocked ->
+                plugin.getMessages().cmd(sender, fresh ? "started-new" : "started-continued",
+                        java.util.Map.of("hunt_id", hunt.getId()), Messages.hunt(hunt),
+                        Messages.huntId(hunt), Messages.text("total", plugin.getHuntManager().liveTotal(hunt)),
+                        Messages.text("blocked", blocked)));
     }
 
     public void end(CommandSender sender, Hunt hunt, Long at) {
@@ -97,10 +100,8 @@ public class HuntActions {
             return;
         }
         plugin.getMessages().cmd(sender, "check-conflicts", Messages.hunt(hunt), Messages.text("count", conflicts.size()));
-        if (sender instanceof Player player) {
-            for (WorldSync.Conflict conflict : conflicts) {
-                plugin.getWorldSync().sendConflict(player, hunt, conflict.head(), conflict.occupant());
-            }
+        for (WorldSync.Conflict conflict : conflicts) {
+            plugin.getWorldSync().sendConflict(sender, hunt, conflict.head(), conflict.occupant());
         }
     }
 

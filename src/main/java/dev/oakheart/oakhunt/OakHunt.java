@@ -166,9 +166,9 @@ public final class OakHunt extends JavaPlugin {
         huntManager.startScheduler();
         feedbackService.start();
         editorService.start();
-        // Bring loaded chunks in line with each hunt's state (e.g. a scheduled end passed while down).
+        // Bring every head in line with its hunt's state (e.g. a scheduled end passed while down).
         Bukkit.getScheduler().runTask(this, () -> {
-            for (Hunt hunt : huntManager.hunts()) worldSync.applyHunt(hunt);
+            for (Hunt hunt : huntManager.hunts()) worldSync.syncHunt(hunt);
         });
     }
 

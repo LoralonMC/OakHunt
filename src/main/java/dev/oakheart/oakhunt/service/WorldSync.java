@@ -51,6 +51,24 @@ public class WorldSync {
         }
     }
 
+    /**
+     * Loads every chunk holding one of the hunt's heads and reconciles each head, so a start or end
+     * takes effect everywhere at once instead of waiting for players to load the chunks.
+     *
+     * @return the number of blocked heads afterwards, completed on the main thread
+     */
+    public CompletableFuture<Integer> syncHunt(Hunt hunt) {
+        List<Head> heads = plugin.getHuntManager().heads(hunt);
+        List<CompletableFuture<?>> loads = new ArrayList<>();
+        for (Head head : heads) {
+            World world = Bukkit.getWorld(head.getWorld());
+            if (world == null) continue;
+            loads.add(world.getChunkAtAsync(head.getX() >> 4, head.getZ() >> 4).thenAccept(chunk -> reconcile(head)));
+        }
+        return CompletableFuture.allOf(loads.toArray(CompletableFuture[]::new))
+                .thenApply(v -> (int) heads.stream().filter(Head::isConflict).count());
+    }
+
     public void reconcileChunk(Chunk chunk) {
         for (Head head : plugin.getHuntManager().headsInChunk(chunk.getWorld().getName(), chunk.getX(), chunk.getZ())) {
             if (!head.isArchived()) reconcile(head);
@@ -187,7 +205,7 @@ public class WorldSync {
         plugin.getEditorService().refreshHead(head);
     }
 
-    public void sendConflict(Player player, Hunt hunt, Head head, Material occupant) {
+    public void sendConflict(org.bukkit.command.CommandSender player, Hunt hunt, Head head, Material occupant) {
         plugin.getMessages().cmd(player, "conflict-line", java.util.Map.of("head_id", String.valueOf(head.getId())),
                 Messages.hunt(hunt),
                 Messages.text("number", head.getNumber()), Messages.text("head_id", head.getId()),
