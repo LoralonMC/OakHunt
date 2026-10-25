@@ -7,11 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.0] - 2026-10-25
+## [1.0.0] - 2026-10-26
 
 ### Added
 
 - Initial release: head hunts managed in-game with `/headhunt`, replacing HeadBlocks
+- Start, end and boot load every head chunk, so a hunt is fully placed or removed at once
 - Hunt states (draft, scheduled, active, ended) with heads stored as records and placed as real blocks only while a hunt is active
 - Runs: each restart is a fresh run with its own progress, or continues the last one
 - Start check that skips blocked spots, drops them from the total and reports them with teleport, remove and force-place actions
