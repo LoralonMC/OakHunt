@@ -1,0 +1,63 @@
+name: OakHunt
+version: '${version}'
+main: dev.oakheart.oakhunt.OakHunt
+description: 'Head hunts run entirely in-game: scheduled, hidden until they start, and restorable.'
+api-version: '26.3'
+authors:
+  - Loralon
+website: https://github.com/LoralonMC/OakHunt
+dependencies:
+  server:
+    packetevents:
+      load: BEFORE
+      required: true
+    PlaceholderAPI:
+      load: BEFORE
+      required: false
+    HeadDatabase:
+      load: BEFORE
+      required: false
+    SCore:
+      load: BEFORE
+      required: false
+    ExecutableItems:
+      load: BEFORE
+      required: false
+    Nexo:
+      load: BEFORE
+      required: false
+    OakOverflow:
+      load: BEFORE
+      required: false
+    CoreProtect:
+      load: BEFORE
+      required: false
+permissions:
+  oakhunt.*:
+    description: 'All OakHunt permissions'
+    default: op
+    children:
+      oakhunt.use: true
+      oakhunt.edit: true
+      oakhunt.manage: true
+      oakhunt.player: true
+      oakhunt.rewards.commands: true
+      oakhunt.admin: true
+  oakhunt.use:
+    description: 'Find heads, open the journal and leaderboards'
+    default: true
+  oakhunt.edit:
+    description: 'Create hunts, edit mode, placers, skins, clues and the start check'
+    default: op
+  oakhunt.manage:
+    description: 'Start, end and schedule hunts; item and key rewards; hunt settings'
+    default: op
+  oakhunt.player:
+    description: 'View, reset or grant a player''s hunt progress'
+    default: op
+  oakhunt.rewards.commands:
+    description: 'Add or change console-command rewards (runs as console)'
+    default: op
+  oakhunt.admin:
+    description: 'Archive hunts, reload, import past hunts'
+    default: op

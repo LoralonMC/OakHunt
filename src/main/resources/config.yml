@@ -1,0 +1,90 @@
+# ============================================================
+# OakHunt
+# ============================================================
+# Hunts, heads, rewards and progress live in plugins/OakHunt/oakhunt.db
+# and are managed in-game with /headhunt. This file only holds
+# server-wide defaults. Player-facing text lives in messages.yml.
+# Sounds are namespaced keys (e.g. block.amethyst_block.chime).
+# Particles are particle names without data (e.g. happy_villager).
+
+debug: false
+
+# ============================================================
+# HUNTS
+# ============================================================
+hunts:
+  # Blocks a head may replace when a hunt starts. Anything else in the
+  # spot is a conflict: the head is skipped and staff get a report.
+  replaceable:
+    - AIR
+    - CAVE_AIR
+    - SHORT_GRASS
+    - FERN
+    - SNOW
+  # Ignore a second click on a head within this many milliseconds
+  click-cooldown-ms: 400
+
+# ============================================================
+# FEEDBACK
+# ============================================================
+# Particles and sounds are sent to the finding player only.
+feedback:
+  new-find:
+    sound: block.amethyst_block.chime
+    volume: 1.0
+    pitch: 1.2
+    particle: totem_of_undying
+    particle-count: 16
+  already-found:
+    sound: block.note_block.bass
+    volume: 0.8
+    pitch: 0.8
+    particle: happy_villager
+    particle-count: 12
+  # Particles above heads the player has already found
+  found-ambient:
+    enabled: true
+    particle: composter
+    particle-count: 2
+    radius: 16
+    interval-ticks: 20
+  milestone:
+    sound: entity.player.levelup
+    volume: 1.0
+    pitch: 1.0
+  completion:
+    sound: ui.toast.challenge_complete
+    volume: 1.0
+    pitch: 1.0
+  # Proximity hints, for hunts that enable them in their settings
+  hints:
+    distance: 16
+    # One in this many chance per second near an unfound head
+    frequency: 20
+    sound: block.amethyst_block.chime
+    volume: 0.5
+    pitch: 1.6
+
+# ============================================================
+# EDITOR
+# ============================================================
+editor:
+  # Heads within this many blocks of an editor get a preview and label
+  preview-radius: 48
+  # Blocks above the head where its number label floats
+  label-height: 0.9
+
+# ============================================================
+# INTEGRATIONS
+# ============================================================
+integrations:
+  # Log plugin head placements and removals to CoreProtect as #oakhunt
+  coreprotect: true
+  # Folder (under plugins/) that holds PhoenixCrates key files, used to
+  # list crate keys in the reward editor
+  phoenixcrates-keys-folder: PhoenixCrates/keys
+
+# ========================================
+#          DO NOT EDIT BELOW
+# ========================================
+config-version: 1

@@ -1,0 +1,594 @@
+# ============================================================
+# OakHunt Messages
+# ============================================================
+# MiniMessage format: https://docs.advntr.dev/minimessage/format.html
+# Set a message to "" to disable it. Display modes: chat, action_bar
+#
+# Common placeholders: <hunt> hunt display name, <hunt_id> hunt id,
+#   <found> heads found, <total> heads in the hunt, <number> head number,
+#   <player> player name, <count> a count, <time> a UTC time,
+#   <countdown> time until it, <milestone> milestone (a number or "all")
+
+# ============================================================
+# GAMEPLAY MESSAGES
+# ============================================================
+find-new:
+  text: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ʏᴏᴜ ꜰᴏᴜɴᴅ ᴀ ʜɪᴅᴅᴇɴ ʜᴇᴀᴅ ɪɴ <hunt><#f2ebd7>! <#6C757D>(<found>/<total>)"
+  display: chat
+find-already:
+  text: "<#8FAA87>ᴀʟʀᴇᴀᴅʏ ꜰᴏᴜɴᴅ <#6C757D>(<found>/<total>)"
+  display: action_bar
+find-title:
+  text: "<#B8E6D5><found>/<total>"
+find-subtitle:
+  text: "<#f2ebd7>ʜɪᴅᴅᴇɴ ʜᴇᴀᴅ ꜰᴏᴜɴᴅ"
+complete-title:
+  text: "<hunt>"
+complete-subtitle:
+  text: "<#f2ebd7>ᴇᴠᴇʀʏ ʜᴇᴀᴅ ꜰᴏᴜɴᴅ! <#6C757D>(#<rank>)"
+first-finisher:
+  text: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#DDB67D><player> <#f2ebd7>ɪꜱ ᴛʜᴇ ꜰɪʀꜱᴛ ᴛᴏ ꜰɪɴᴅ ᴇᴠᴇʀʏ ʜᴇᴀᴅ ɪɴ <hunt><#f2ebd7>!"
+milestone-reached:
+  text: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ʏᴏᴜ'ᴠᴇ ꜰᴏᴜɴᴅ <#B8E6D5><found> ʜᴇᴀᴅꜱ<#f2ebd7> ɪɴ <hunt><#f2ebd7>. ʜᴇʀᴇ'ꜱ ᴀ ʀᴇᴡᴀʀᴅ!"
+  display: chat
+milestone-complete:
+  text: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ʏᴏᴜ'ᴠᴇ ꜰᴏᴜɴᴅ <#B8E6D5>ᴀʟʟ <total> ʜᴇᴀᴅꜱ<#f2ebd7> ɪɴ <hunt><#f2ebd7>!"
+  display: chat
+# Used when a milestone's broadcast is set to "default" in the reward editor
+default-broadcast: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#DDB67D><player> <#f2ebd7>ꜰᴏᴜɴᴅ <#B8E6D5><found> ʜᴇᴀᴅꜱ<#f2ebd7> ɪɴ <hunt><#f2ebd7>!"
+reward-overflow:
+  text: "<#D89B6A>ɪɴᴠᴇɴᴛᴏʀʏ ꜰᴜʟʟ: ʀᴇᴡᴀʀᴅ ꜱᴇɴᴛ ᴛᴏ <#FCD472>/ᴏᴠᴇʀꜰʟᴏᴡ"
+  display: action_bar
+reward-dropped:
+  text: "<#D89B6A>ɪɴᴠᴇɴᴛᴏʀʏ ꜰᴜʟʟ: ʀᴇᴡᴀʀᴅ ᴅʀᴏᴘᴘᴇᴅ ᴀᴛ ʏᴏᴜʀ ꜰᴇᴇᴛ"
+  display: action_bar
+reward-failed:
+  text: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ᴀ ʀᴇᴡᴀʀᴅ <#C27B6B>ᴄᴏᴜʟᴅɴ'ᴛ ʙᴇ ɢɪᴠᴇɴ<#f2ebd7>. ꜱᴛᴀꜰꜰ ᴄᴀɴ ꜱᴇᴇ ɪᴛ ɪɴ ᴛʜᴇ ʟᴏɢ, ᴏᴘᴇɴ ᴀ ᴛɪᴄᴋᴇᴛ ɪꜰ ɪᴛ ᴅᴏᴇꜱɴ'ᴛ ᴀʀʀɪᴠᴇ."
+  display: chat
+hint:
+  text: "<#B8E6D5>ꜱᴏᴍᴇᴛʜɪɴɢ ɢʟɪᴍᴍᴇʀꜱ ɴᴇᴀʀʙʏ..."
+  display: action_bar
+hunt-started:
+  text: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <hunt> <#f2ebd7>ʜᴀꜱ ʙᴇɢᴜɴ! ʜᴇᴀᴅꜱ ᴀʀᴇ ʜɪᴅᴅᴇɴ ᴀʀᴏᴜɴᴅ ᴛʜᴇ ᴡᴏʀʟᴅ. <click:run_command:'/headhunt'><hover:show_text:'Open the journal'><#FCD472>[/headhunt]</hover></click>"
+  display: chat
+hunt-started-log:
+  text: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ʜᴜɴᴛ ꜱᴛᴀʀᴛᴇᴅ: <hunt>"
+  display: chat
+hunt-ended:
+  text: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <hunt> <#f2ebd7>ʜᴀꜱ ᴇɴᴅᴇᴅ. ᴛʜᴀɴᴋꜱ ꜰᴏʀ ʜᴜɴᴛɪɴɢ!"
+  display: chat
+placer-name: "<#B8E6D5><hunt> <#f2ebd7>Placer"
+placer-lore:
+  - "<#6C757D>ꜱᴋɪɴ: <#f2ebd7><skin> <#6C757D>(<count> ɪɴ ꜱᴇᴛ)"
+  - ""
+  - "<#f2ebd7>ᴘʟᴀᴄᴇ ɪᴛ ɪɴ ᴇᴅɪᴛ ᴍᴏᴅᴇ ᴛᴏ ᴀᴅᴅ ᴀ ʜᴇᴀᴅ."
+  - "<#f2ebd7>ɪᴛ ɪꜱ ɴᴇᴠᴇʀ ᴜꜱᴇᴅ ᴜᴘ."
+  - ""
+  - "<#FCD472>[ᴘʟᴀᴄᴇ ᴛᴏ ᴀᴅᴅ ᴀ ʜᴇᴀᴅ]"
+
+# --- edit mode
+edit-actionbar:
+  text: "<#6C757D>ᴇᴅɪᴛɪɴɢ <hunt> <#6C757D>· <#f2ebd7><count> ʜᴇᴀᴅꜱ <#6C757D>· <#f2ebd7><state>"
+  display: action_bar
+edit-remove-hint:
+  text: "<#D89B6A>ꜱɴᴇᴀᴋ + ʟᴇꜰᴛ-ᴄʟɪᴄᴋ ᴛᴏ ʀᴇᴍᴏᴠᴇ ᴀ ʜᴇᴀᴅ"
+  display: action_bar
+edit-closed:
+  text: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴇᴅɪᴛ ᴍᴏᴅᴇ ᴄʟᴏꜱᴇᴅ: <hunt> <#f2ebd7>ᴡᴀꜱ ᴀʀᴄʜɪᴠᴇᴅ."
+  display: chat
+head-added:
+  text: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴀᴅᴅᴇᴅ ʜᴇᴀᴅ <#B8E6D5>#<number> <#f2ebd7>ᴛᴏ <hunt><#f2ebd7>. <click:run_command:'/headhunt undo'><hover:show_text:'Undo'><#FCD472>[ᴜɴᴅᴏ]</hover></click>"
+  display: chat
+head-removed:
+  text: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ʀᴇᴍᴏᴠᴇᴅ ʜᴇᴀᴅ <#B8E6D5>#<number> <#f2ebd7>ꜰʀᴏᴍ <hunt><#f2ebd7>. <click:run_command:'/headhunt undo'><hover:show_text:'Undo'><#FCD472>[ᴜɴᴅᴏ]</hover></click>"
+  display: chat
+spot-taken:
+  text: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ᴛʜᴀᴛ ꜱᴘᴏᴛ <#C27B6B>ᴀʟʀᴇᴀᴅʏ ʜᴏʟᴅꜱ ᴀ ʜᴇᴀᴅ<#f2ebd7> ꜰʀᴏᴍ <hunt><#f2ebd7>."
+  display: chat
+placer-needs-edit:
+  text: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ᴘʟᴀᴄᴇʀꜱ <#C27B6B>ᴏɴʟʏ ᴡᴏʀᴋ ɪɴ ᴇᴅɪᴛ ᴍᴏᴅᴇ<#f2ebd7>: /headhunt edit <hunt_id>"
+  display: chat
+placer-no-skins:
+  text: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ᴛʜɪꜱ ᴘʟᴀᴄᴇʀ'ꜱ ꜱᴋɪɴ <#C27B6B>ɪꜱ ɴᴏ ʟᴏɴɢᴇʀ ɪɴ ᴛʜᴇ ꜱᴇᴛ<#f2ebd7>. ɢᴇᴛ ᴀ ɴᴇᴡ ᴏɴᴇ ᴡɪᴛʜ /headhunt head."
+  display: chat
+head-no-skin:
+  text: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ᴛʜᴀᴛ ʜᴇᴀᴅ <#C27B6B>ʜᴀꜱ ɴᴏ ꜱᴋɪɴ<#f2ebd7>. ᴜꜱᴇ ᴀ ᴘʟᴀᴄᴇʀ ᴏʀ ᴀ ʜᴇᴀᴅ ꜰʀᴏᴍ /heads."
+  display: chat
+editor-label: "<#FCD472>#<number>"
+editor-label-clue: "<#B8E6D5>ᴄʟᴜᴇ"
+editor-label-conflict: "<#C27B6B>ʙʟᴏᴄᴋᴇᴅ"
+
+# ============================================================
+# MENUS
+# ============================================================
+# Titles are plain text. Button names are title case; lore is small caps.
+gui:
+  hunts-title: "Head Hunts"
+  hunt-title: "Hunt: <hunt_id>"
+  heads-title: "Heads: <hunt_id>"
+  head-title: "Head #<number>"
+  skins-title: "Skins: <hunt_id>"
+  rewards-title: "Rewards: <hunt_id>"
+  milestone-title: "Milestone: <milestone>"
+  reward-type-title: "Add a Reward"
+  keys-title: "Pick a Crate Key"
+  settings-title: "Settings: <hunt_id>"
+  runs-title: "Runs: <hunt_id>"
+  journal-title: "Hunt Journal"
+  history-title: "Past Hunts"
+  state-draft: "<#6C757D>ᴅʀᴀꜰᴛ"
+  state-scheduled: "<#D89B6A>ꜱᴄʜᴇᴅᴜʟᴇᴅ"
+  state-active: "<#8FAA87>ᴀᴄᴛɪᴠᴇ"
+  state-ended: "<#C27B6B>ᴇɴᴅᴇᴅ"
+  schedule-starts: "<#f2ebd7>ꜱᴛᴀʀᴛꜱ <#FCD472><time> <#6C757D>(ɪɴ <countdown>)"
+  schedule-ends: "<#f2ebd7>ᴇɴᴅꜱ <#FCD472><time> <#6C757D>(ɪɴ <countdown>)"
+  schedule-none: "<#6C757D>ɴᴏᴛʜɪɴɢ ꜱᴄʜᴇᴅᴜʟᴇᴅ"
+  hunt-icon-lore:
+    - "<#6C757D>ɪᴅ: <#f2ebd7><hunt_id>"
+    - "<#6C757D>ꜱᴛᴀᴛᴇ: <state>"
+    - "<#6C757D>ʜᴇᴀᴅꜱ: <#f2ebd7><heads> <#6C757D>(<total> ᴄᴏᴜɴᴛɪɴɢ, <conflicts> ʙʟᴏᴄᴋᴇᴅ)"
+    - "<#6C757D>ʀᴜɴ: <#f2ebd7><run>"
+    - "<schedule>"
+  back-name: "<#C27B6B>Go Back"
+  back-lore:
+    - "<#f2ebd7>ʙᴀᴄᴋ ᴛᴏ ᴛʜᴇ ᴘʀᴇᴠɪᴏᴜꜱ ᴍᴇɴᴜ."
+  previous-page-name: "<#f2ebd7>Previous Page"
+  previous-page-lore: ""
+  next-page-name: "<#f2ebd7>Next Page"
+  next-page-lore: ""
+  create-hunt-name: "<#8FAA87>Create Hunt"
+  create-hunt-lore:
+    - "<#f2ebd7>ᴛʏᴘᴇ ᴀɴ ɪᴅ ɪɴ ᴄʜᴀᴛ, ᴇ.ɢ. halloween."
+    - "<#6C757D>ʟᴏᴡᴇʀᴄᴀꜱᴇ ʟᴇᴛᴛᴇʀꜱ, ɴᴜᴍʙᴇʀꜱ, ʜʏᴘʜᴇɴꜱ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴄʀᴇᴀᴛᴇ]"
+  start-hunt-name: "<#8FAA87>Start Hunt"
+  start-hunt-lore:
+    - "<schedule>"
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ꜱᴛᴀʀᴛ ɴᴏᴡ]"
+    - "<#FCD472>[ʀɪɢʜᴛ-ᴄʟɪᴄᴋ ᴛᴏ ꜱᴄʜᴇᴅᴜʟᴇ]"
+  end-hunt-name: "<#C27B6B>End Hunt"
+  end-hunt-lore:
+    - "<schedule>"
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴇɴᴅ ɴᴏᴡ]"
+    - "<#FCD472>[ʀɪɢʜᴛ-ᴄʟɪᴄᴋ ᴛᴏ ꜱᴄʜᴇᴅᴜʟᴇ]"
+  cancel-schedule-name: "<#D89B6A>Cancel Schedule"
+  cancel-schedule-lore:
+    - "<schedule>"
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴄᴀɴᴄᴇʟ]"
+  edit-mode-on-name: "<#8FAA87>Edit Mode: On"
+  edit-mode-on-lore:
+    - "<#f2ebd7>ʏᴏᴜ ꜱᴇᴇ ᴛʜɪꜱ ʜᴜɴᴛ'ꜱ ʜᴇᴀᴅꜱ, ɴᴜᴍʙᴇʀᴇᴅ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ʟᴇᴀᴠᴇ ᴇᴅɪᴛ ᴍᴏᴅᴇ]"
+  edit-mode-off-name: "<#C27B6B>Edit Mode: Off"
+  edit-mode-off-lore:
+    - "<#f2ebd7>ᴘʟᴀᴄᴇ, ɪɴꜱᴘᴇᴄᴛ ᴀɴᴅ ʀᴇᴍᴏᴠᴇ ʜᴇᴀᴅꜱ."
+    - "<#f2ebd7>ᴏɴʟʏ ʏᴏᴜ ꜱᴇᴇ ᴛʜᴇ ᴘʀᴇᴠɪᴇᴡꜱ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴇɴᴛᴇʀ ᴇᴅɪᴛ ᴍᴏᴅᴇ]"
+  skins-name: "<#f2ebd7>Skins"
+  skins-lore:
+    - "<#6C757D><count> ꜱᴋɪɴꜱ ɪɴ ᴛʜᴇ ꜱᴇᴛ"
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴍᴀɴᴀɢᴇ ꜱᴋɪɴꜱ]"
+  heads-name: "<#f2ebd7>Heads"
+  heads-lore:
+    - "<#6C757D><heads> ʜᴇᴀᴅꜱ, <conflicts> ʙʟᴏᴄᴋᴇᴅ"
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ʟɪꜱᴛ ʜᴇᴀᴅꜱ]"
+  check-name: "<#f2ebd7>Start Check"
+  check-lore:
+    - "<#f2ebd7>ᴄʜᴇᴄᴋꜱ ᴇᴠᴇʀʏ ꜱᴘᴏᴛ ꜰᴏʀ ʙʟᴏᴄᴋꜱ"
+    - "<#f2ebd7>ᴡɪᴛʜᴏᴜᴛ ꜱᴛᴀʀᴛɪɴɢ ᴛʜᴇ ʜᴜɴᴛ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴄʜᴇᴄᴋ]"
+  rewards-name: "<#f2ebd7>Rewards"
+  rewards-lore:
+    - "<#6C757D><count> ᴍɪʟᴇꜱᴛᴏɴᴇꜱ"
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴇᴅɪᴛ ʀᴇᴡᴀʀᴅꜱ]"
+  settings-name: "<#f2ebd7>Feedback & Hints"
+  settings-lore:
+    - "<#f2ebd7>ʜɪɴᴛꜱ, ᴛɪᴛʟᴇꜱ, ꜰɪʀᴇᴡᴏʀᴋꜱ ᴀɴᴅ ᴄʟᴜᴇꜱ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴏᴘᴇɴ ꜱᴇᴛᴛɪɴɢꜱ]"
+  runs-name: "<#f2ebd7>Runs"
+  runs-lore:
+    - "<#6C757D><count> ʀᴜɴꜱ"
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴠɪᴇᴡ ʀᴜɴꜱ]"
+  name-description-name: "<#f2ebd7>Name & Description"
+  name-description-lore:
+    - "<#6C757D>ɴᴀᴍᴇ: <name>"
+    - "<#6C757D>ᴅᴇꜱᴄʀɪᴘᴛɪᴏɴ: <#f2ebd7><description>"
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ʀᴇɴᴀᴍᴇ]"
+    - "<#FCD472>[ʀɪɢʜᴛ-ᴄʟɪᴄᴋ ᴛᴏ ꜱᴇᴛ ᴅᴇꜱᴄʀɪᴘᴛɪᴏɴ]"
+  archive-hunt-name: "<#C27B6B>Archive Hunt"
+  archive-hunt-lore:
+    - "<#f2ebd7>ʜɪᴅᴇꜱ ᴛʜᴇ ʜᴜɴᴛ. ʀᴜɴꜱ ᴀɴᴅ ʀᴇꜱᴜʟᴛꜱ ᴀʀᴇ ᴋᴇᴘᴛ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴀʀᴄʜɪᴠᴇ]"
+  head-icon-name: "<#f2ebd7>Head #<number>"
+  head-icon-lore:
+    - "<#6C757D>ᴀᴛ: <#f2ebd7><world> <x>, <y>, <z>"
+    - "<#6C757D>ᴄʟᴜᴇ: <#f2ebd7><clue>"
+    - "<#6C757D>ꜰᴏᴜɴᴅ ʙʏ: <#f2ebd7><finds>"
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴛᴇʟᴇᴘᴏʀᴛ]"
+    - "<#FCD472>[ʀɪɢʜᴛ-ᴄʟɪᴄᴋ ꜰᴏʀ ᴏᴘᴛɪᴏɴꜱ]"
+    - "<#FCD472>[ꜱʜɪꜰᴛ-ᴄʟɪᴄᴋ ᴛᴏ ʀᴇᴍᴏᴠᴇ]"
+  head-icon-conflict-lore:
+    - "<#C27B6B>ʙʟᴏᴄᴋᴇᴅ: ꜱᴏᴍᴇᴛʜɪɴɢ ᴏᴄᴄᴜᴘɪᴇꜱ ᴛʜɪꜱ ꜱᴘᴏᴛ"
+    - "<#6C757D>ᴀᴛ: <#f2ebd7><world> <x>, <y>, <z>"
+    - "<#6C757D>ᴄʟᴜᴇ: <#f2ebd7><clue>"
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴛᴇʟᴇᴘᴏʀᴛ]"
+    - "<#FCD472>[ʀɪɢʜᴛ-ᴄʟɪᴄᴋ ꜰᴏʀ ᴏᴘᴛɪᴏɴꜱ]"
+    - "<#FCD472>[ꜱʜɪꜰᴛ-ᴄʟɪᴄᴋ ᴛᴏ ʀᴇᴍᴏᴠᴇ]"
+  head-skin-name: "<#f2ebd7>Change Skin"
+  head-skin-lore:
+    - "<#f2ebd7>ᴜꜱᴇꜱ ᴛʜᴇ ʜᴇᴀᴅ ɪɴ ʏᴏᴜʀ ʜᴀɴᴅ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴄʜᴀɴɢᴇ]"
+  head-clue-name: "<#f2ebd7>Clue"
+  head-clue-lore:
+    - "<#6C757D>ɴᴏᴡ: <#f2ebd7><clue>"
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ꜱᴇᴛ]"
+  force-place-name: "<#D89B6A>Force Place"
+  force-place-lore:
+    - "<#f2ebd7>ʀᴇᴘʟᴀᴄᴇꜱ ᴡʜᴀᴛᴇᴠᴇʀ ʙʟᴏᴄᴋꜱ ᴛʜɪꜱ ꜱᴘᴏᴛ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ꜰᴏʀᴄᴇ ᴘʟᴀᴄᴇ]"
+  remove-head-name: "<#C27B6B>Remove Head"
+  remove-head-lore:
+    - "<#f2ebd7>ᴀʀᴄʜɪᴠᴇᴅ, ꜱᴏ ꜰɪɴᴅꜱ ᴀʀᴇ ᴋᴇᴘᴛ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ʀᴇᴍᴏᴠᴇ]"
+  skin-icon-name: "<#f2ebd7>Skin #<id>"
+  skin-icon-lore:
+    - "<#6C757D>ꜱᴏᴜʀᴄᴇ: <#f2ebd7><label>"
+    - "<#6C757D>ᴜꜱᴇᴅ ʙʏ: <#f2ebd7><used> ʜᴇᴀᴅꜱ"
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ꜰᴏʀ ᴀ ᴘʟᴀᴄᴇʀ]"
+    - "<#FCD472>[ʀɪɢʜᴛ-ᴄʟɪᴄᴋ ᴛᴏ ʀᴇᴘʟᴀᴄᴇ ᴡɪᴛʜ ʜᴇʟᴅ ʜᴇᴀᴅ]"
+    - "<#FCD472>[ꜱʜɪꜰᴛ-ᴄʟɪᴄᴋ ᴛᴏ ʀᴇᴍᴏᴠᴇ]"
+  add-held-skin-name: "<#8FAA87>Add Held Head"
+  add-held-skin-lore:
+    - "<#f2ebd7>ᴀᴅᴅꜱ ᴛʜᴇ ʜᴇᴀᴅ ɪɴ ʏᴏᴜʀ ʜᴀɴᴅ."
+    - "<#6C757D>ɢʀᴀʙ ᴏɴᴇ ꜰʀᴏᴍ /heads ꜰɪʀꜱᴛ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴀᴅᴅ]"
+  add-source-skin-name: "<#8FAA87>Add by Id or Name"
+  add-source-skin-lore:
+    - "<#f2ebd7>ᴀ ʜᴇᴀᴅᴅᴀᴛᴀʙᴀꜱᴇ ɪᴅ, ᴀ ᴘʟᴀʏᴇʀ ɴᴀᴍᴇ"
+    - "<#f2ebd7>ᴏʀ ᴜᴜɪᴅ, ᴏʀ ᴀ ᴛᴇxᴛᴜʀᴇ ᴠᴀʟᴜᴇ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴛʏᴘᴇ ɪᴛ]"
+  random-placer-name: "<#B8E6D5>Random Placer"
+  random-placer-lore:
+    - "<#f2ebd7>ᴘʟᴀᴄᴇꜱ ᴀ ʀᴀɴᴅᴏᴍ ꜱᴋɪɴ ꜰʀᴏᴍ ᴛʜᴇ ꜱᴇᴛ"
+    - "<#f2ebd7>ᴇᴀᴄʜ ᴛɪᴍᴇ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ɢᴇᴛ ᴏɴᴇ]"
+  milestone-name: "<#f2ebd7>At <count> Finds"
+  milestone-all-name: "<#B8E6D5>Completion"
+  milestone-icon-lore:
+    - "<#6C757D>ʙʀᴏᴀᴅᴄᴀꜱᴛ: <#f2ebd7><broadcast>"
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴇᴅɪᴛ]"
+    - "<#FCD472>[ꜱʜɪꜰᴛ-ᴄʟɪᴄᴋ ᴛᴏ ᴛᴇꜱᴛ-ᴘᴀʏ ʏᴏᴜʀꜱᴇʟꜰ]"
+    - "<#FCD472>[ꜱʜɪꜰᴛ-ʀɪɢʜᴛ-ᴄʟɪᴄᴋ ᴛᴏ ʀᴇᴍᴏᴠᴇ]"
+  reward-line: "<#6C757D>· <#f2ebd7><reward> <#6C757D>(<type>)"
+  no-rewards: "<#6C757D>ɴᴏ ʀᴇᴡᴀʀᴅꜱ ʏᴇᴛ"
+  add-milestone-name: "<#8FAA87>Add Milestone"
+  add-milestone-lore:
+    - "<#f2ebd7>ᴛʏᴘᴇ ᴀ ɴᴜᴍʙᴇʀ ᴏꜰ ꜰɪɴᴅꜱ, ᴏʀ all."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴀᴅᴅ]"
+  reward-icon-name: "<#f2ebd7>Reward: <type>"
+  reward-icon-lore:
+    - "<#f2ebd7><reward>"
+    - ""
+    - "<#FCD472>[ꜱʜɪꜰᴛ-ᴄʟɪᴄᴋ ᴛᴏ ʀᴇᴍᴏᴠᴇ]"
+  add-reward-name: "<#8FAA87>Add Reward"
+  add-reward-lore:
+    - "<#f2ebd7>ɪᴛᴇᴍ, ᴄʀᴀᴛᴇ ᴋᴇʏ ᴏʀ ᴄᴏᴍᴍᴀɴᴅ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴀᴅᴅ]"
+  milestone-message-name: "<#f2ebd7>Message"
+  milestone-message-lore:
+    - "<#6C757D>ɴᴏᴡ: <#f2ebd7><message>"
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ꜱᴇᴛ]"
+  broadcast-on-name: "<#8FAA87>Broadcast: On"
+  broadcast-on-lore:
+    - "<#f2ebd7>ᴇᴠᴇʀʏᴏɴᴇ ꜱᴇᴇꜱ ɪᴛ ᴡʜᴇɴ ᴛʜɪꜱ ɪꜱ ʀᴇᴀᴄʜᴇᴅ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴛᴜʀɴ ᴏꜰꜰ]"
+    - "<#FCD472>[ʀɪɢʜᴛ-ᴄʟɪᴄᴋ ᴛᴏ ᴄʜᴀɴɢᴇ ᴛʜᴇ ᴛᴇxᴛ]"
+  broadcast-off-name: "<#C27B6B>Broadcast: Off"
+  broadcast-off-lore:
+    - "<#f2ebd7>ᴏɴʟʏ ᴛʜᴇ ᴘʟᴀʏᴇʀ ꜱᴇᴇꜱ ɪᴛ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴛᴜʀɴ ᴏɴ]"
+  test-pay-name: "<#f2ebd7>Test Payout"
+  test-pay-lore:
+    - "<#f2ebd7>ɢɪᴠᴇꜱ ʏᴏᴜ ᴛʜᴇꜱᴇ ʀᴇᴡᴀʀᴅꜱ."
+    - "<#6C757D>ɴᴏᴛ ʀᴇᴄᴏʀᴅᴇᴅ ᴀꜱ ᴀ ᴘᴀʏᴏᴜᴛ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴛᴇꜱᴛ]"
+  type-executable-name: "<#f2ebd7>ExecutableItems Item"
+  type-executable-lore:
+    - "<#f2ebd7>ʙᴜɪʟᴛ ꜰʀᴇꜱʜ ꜰʀᴏᴍ ɪᴛꜱ ɪᴅ ᴀᴛ ᴘᴀʏᴏᴜᴛ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴀᴅᴅ]"
+  type-nexo-name: "<#f2ebd7>Nexo Item"
+  type-nexo-lore:
+    - "<#f2ebd7>ʙᴜɪʟᴛ ꜰʀᴇꜱʜ ꜰʀᴏᴍ ɪᴛꜱ ɪᴅ ᴀᴛ ᴘᴀʏᴏᴜᴛ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴀᴅᴅ]"
+  type-key-name: "<#f2ebd7>Crate Key"
+  type-key-lore:
+    - "<#f2ebd7>ᴘɪᴄᴋ ᴀ ᴄʀᴀᴛᴇ, ᴛʜᴇɴ ᴛʜᴇ ᴀᴍᴏᴜɴᴛ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴀᴅᴅ]"
+  type-held-name: "<#f2ebd7>Held Item"
+  type-held-lore:
+    - "<#f2ebd7>ᴀ ᴄᴏᴘʏ ᴏꜰ ᴛʜᴇ ᴠᴀɴɪʟʟᴀ ɪᴛᴇᴍ ɪɴ ʏᴏᴜʀ ʜᴀɴᴅ."
+    - "<#6C757D>ᴜꜱᴇ ᴛʜᴇ ɪᴛᴇᴍ ᴛʏᴘᴇꜱ ꜰᴏʀ ᴇɪ ᴏʀ ɴᴇxᴏ ɪᴛᴇᴍꜱ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴀᴅᴅ]"
+  type-command-name: "<#f2ebd7>Console Command"
+  type-command-lore:
+    - "<#f2ebd7>ʀᴜɴꜱ ᴀꜱ ᴄᴏɴꜱᴏʟᴇ. {player} ɪꜱ ᴛʜᴇ ᴘʟᴀʏᴇʀ."
+    - "<#6C757D>ᴏᴡɴᴇʀ ᴏɴʟʏ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴀᴅᴅ]"
+  key-icon-name: "<#f2ebd7><key>"
+  key-icon-lore:
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴄʜᴏᴏꜱᴇ]"
+  no-keys-name: "<#C27B6B>No Crate Keys Found"
+  no-keys-lore:
+    - "<#f2ebd7>ᴄʜᴇᴄᴋ ɪɴᴛᴇɢʀᴀᴛɪᴏɴꜱ.ᴘʜᴏᴇɴɪxᴄʀᴀᴛᴇꜱ-ᴋᴇʏꜱ-ꜰᴏʟᴅᴇʀ."
+  setting-hints-on-name: "<#8FAA87>Proximity Hints: On"
+  setting-hints-on-lore:
+    - "<#f2ebd7>ᴘʟᴀʏᴇʀꜱ ɴᴇᴀʀ ᴀɴ ᴜɴꜰᴏᴜɴᴅ ʜᴇᴀᴅ ꜱᴏᴍᴇᴛɪᴍᴇꜱ"
+    - "<#f2ebd7>ɢᴇᴛ ᴀ ʜɪɴᴛ ᴀɴᴅ ᴀ ꜱᴏꜰᴛ ꜱᴏᴜɴᴅ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴛᴜʀɴ ᴏꜰꜰ]"
+  setting-hints-off-name: "<#C27B6B>Proximity Hints: Off"
+  setting-hints-off-lore:
+    - "<#f2ebd7>ɴᴏ ʜɪɴᴛꜱ ɴᴇᴀʀ ᴜɴꜰᴏᴜɴᴅ ʜᴇᴀᴅꜱ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴛᴜʀɴ ᴏɴ]"
+  setting-title-on-name: "<#8FAA87>Title on Find: On"
+  setting-title-on-lore:
+    - "<#f2ebd7>ꜱʜᴏᴡꜱ ᴀ ᴛɪᴛʟᴇ ᴏɴ ᴇᴠᴇʀʏ ꜰɪɴᴅ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴛᴜʀɴ ᴏꜰꜰ]"
+  setting-title-off-name: "<#C27B6B>Title on Find: Off"
+  setting-title-off-lore:
+    - "<#f2ebd7>ᴄʜᴀᴛ ʟɪɴᴇ ᴏɴʟʏ ᴏɴ ᴇᴀᴄʜ ꜰɪɴᴅ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴛᴜʀɴ ᴏɴ]"
+  setting-firework-on-name: "<#8FAA87>Completion Firework: On"
+  setting-firework-on-lore:
+    - "<#f2ebd7>ᴀ ꜰɪʀᴇᴡᴏʀᴋ ᴡʜᴇɴ ᴀ ᴘʟᴀʏᴇʀ ꜰɪɴᴅꜱ ᴇᴠᴇʀʏ ʜᴇᴀᴅ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴛᴜʀɴ ᴏꜰꜰ]"
+  setting-firework-off-name: "<#C27B6B>Completion Firework: Off"
+  setting-firework-off-lore:
+    - "<#f2ebd7>ɴᴏ ꜰɪʀᴇᴡᴏʀᴋ ᴏɴ ᴄᴏᴍᴘʟᴇᴛɪᴏɴ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴛᴜʀɴ ᴏɴ]"
+  setting-first-finisher-on-name: "<#8FAA87>First Finisher Broadcast: On"
+  setting-first-finisher-on-lore:
+    - "<#f2ebd7>ᴀɴɴᴏᴜɴᴄᴇꜱ ᴛʜᴇ ꜰɪʀꜱᴛ ᴘʟᴀʏᴇʀ ᴛᴏ ꜰɪɴɪꜱʜ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴛᴜʀɴ ᴏꜰꜰ]"
+  setting-first-finisher-off-name: "<#C27B6B>First Finisher Broadcast: Off"
+  setting-first-finisher-off-lore:
+    - "<#f2ebd7>ɴᴏ ᴀɴɴᴏᴜɴᴄᴇᴍᴇɴᴛ ꜰᴏʀ ᴛʜᴇ ꜰɪʀꜱᴛ ꜰɪɴɪꜱʜᴇʀ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴛᴜʀɴ ᴏɴ]"
+  setting-clue-mode-name: "<#f2ebd7>Clue Unlocks"
+  setting-clue-mode-lore:
+    - "<#6C757D>ᴍᴏᴅᴇ: <#f2ebd7><mode>"
+    - "<#6C757D>ᴇᴠᴇʀʏ: <#f2ebd7><every> ꜰɪɴᴅꜱ <#6C757D>(ᴇᴠᴇʀʏ ɴ ᴍᴏᴅᴇ)"
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴄʜᴀɴɢᴇ ᴍᴏᴅᴇ]"
+    - "<#FCD472>[ʀɪɢʜᴛ-ᴄʟɪᴄᴋ ᴛᴏ ꜱᴇᴛ ᴇᴠᴇʀʏ ɴ]"
+  run-icon-name: "<#f2ebd7>Run <number>"
+  run-icon-lore:
+    - "<#6C757D>ꜱᴛᴀʀᴛᴇᴅ: <#f2ebd7><started>"
+    - "<#6C757D>ᴇɴᴅᴇᴅ: <#f2ebd7><ended>"
+    - "<#6C757D>ꜰɪɴᴅᴇʀꜱ: <#f2ebd7><finders> <#6C757D>· ᴄᴏᴍᴘʟᴇᴛᴇᴅ: <#f2ebd7><completions>"
+    - "<#6C757D>ᴛᴏᴘ: <#f2ebd7><first>, <second>, <third>"
+  run-icon-imported-lore:
+    - "<#6C757D>ɪᴍᴘᴏʀᴛᴇᴅ (ʀᴇꜱᴜʟᴛꜱ ᴏɴʟʏ)"
+    - "<#6C757D>ꜱᴛᴀʀᴛᴇᴅ: <#f2ebd7><started>"
+    - "<#6C757D>ᴇɴᴅᴇᴅ: <#f2ebd7><ended>"
+    - "<#6C757D>ᴄᴏᴍᴘʟᴇᴛᴇᴅ: <#f2ebd7><completions>"
+    - "<#6C757D>ᴛᴏᴘ: <#f2ebd7><first>, <second>, <third>"
+  journal-none-name: "<#f2ebd7>No Hunts Right Now"
+  journal-none-lore:
+    - "<#f2ebd7>ᴋᴇᴇᴘ ᴀɴ ᴇʏᴇ ᴏɴ ᴀɴɴᴏᴜɴᴄᴇᴍᴇɴᴛꜱ."
+  journal-pick-lore:
+    - "<#f2ebd7>ꜰᴏᴜɴᴅ <#B8E6D5><found>/<total>"
+    - "<bar>"
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴏᴘᴇɴ]"
+  journal-progress-lore:
+    - ""
+    - "<#f2ebd7>ꜰᴏᴜɴᴅ <#B8E6D5><found>/<total>"
+    - "<bar>"
+    - "<#6C757D>ʀᴀɴᴋ: <#f2ebd7><rank> <#6C757D>· ᴛɪᴍᴇ ʟᴇꜰᴛ: <#f2ebd7><left>"
+  journal-next-name: "<#FCD472>Next Reward at <target> Finds"
+  journal-all-paid-name: "<#8FAA87>Every Reward Collected"
+  journal-all-paid-lore:
+    - "<#f2ebd7>ɴɪᴄᴇ ʜᴜɴᴛɪɴɢ!"
+  journal-history-name: "<#f2ebd7>Past Hunts"
+  journal-history-lore:
+    - "<#f2ebd7>ʏᴏᴜʀ ʀᴇꜱᴜʟᴛ ꜰʀᴏᴍ ᴇᴠᴇʀʏ ʜᴜɴᴛ."
+    - ""
+    - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴏᴘᴇɴ]"
+  clue-name: "<#f2ebd7>Clue <index>"
+  clue-found-name: "<#8FAA87>Clue <index> (Found)"
+  clue-text: "<#f2ebd7><clue>"
+  clue-locked-name: "<#6C757D><count> More Clues"
+  clue-locked-lore:
+    - "<#f2ebd7>ᴋᴇᴇᴘ ꜰɪɴᴅɪɴɢ ʜᴇᴀᴅꜱ ᴛᴏ ᴜɴʟᴏᴄᴋ ᴛʜᴇᴍ."
+  history-none-name: "<#f2ebd7>No Past Hunts Yet"
+  history-none-lore:
+    - "<#f2ebd7>ʏᴏᴜʀ ʀᴇꜱᴜʟᴛꜱ ᴡɪʟʟ ꜱʜᴏᴡ ᴜᴘ ʜᴇʀᴇ."
+  history-complete-lore:
+    - "<#6C757D><month>"
+    - "<#f2ebd7>ꜰᴏᴜɴᴅ ᴀʟʟ <#B8E6D5><found> <#f2ebd7>ʜᴇᴀᴅꜱ"
+    - "<#f2ebd7>ꜰɪɴɪꜱʜᴇᴅ <#B8E6D5>#<rank> <#f2ebd7>ᴏꜰ <completions>"
+  history-partial-lore:
+    - "<#6C757D><month>"
+    - "<#f2ebd7>ꜰᴏᴜɴᴅ <#B8E6D5><found> <#f2ebd7>ʜᴇᴀᴅꜱ"
+    - "<#6C757D>ʀᴀɴᴋ <position>"
+  choose-run-title: "Continue or Start Fresh?"
+  choose-run-yes-name: "<#8FAA87>Continue Last Run"
+  choose-run-yes-lore:
+    - "<#f2ebd7>ᴘʟᴀʏᴇʀꜱ ᴋᴇᴇᴘ ᴛʜᴇɪʀ ᴘʀᴏɢʀᴇꜱꜱ."
+    - "<#6C757D>ꜰᴏʀ ᴀɴ ᴀᴄᴄɪᴅᴇɴᴛᴀʟ ᴇɴᴅ."
+  choose-run-no-name: "<#B8E6D5>Start a New Run"
+  choose-run-no-lore:
+    - "<#f2ebd7>ᴇᴠᴇʀʏᴏɴᴇ ꜱᴛᴀʀᴛꜱ ꜰʀᴇꜱʜ."
+    - "<#6C757D>ʟᴀꜱᴛ ʀᴜɴ'ꜱ ʀᴇꜱᴜʟᴛꜱ ᴀʀᴇ ᴋᴇᴘᴛ ᴀꜱ ʜɪꜱᴛᴏʀʏ."
+  confirm-end-title: "End This Hunt?"
+  confirm-end-yes-name: "<#C27B6B>End Now"
+  confirm-end-yes-lore:
+    - "<#f2ebd7>ʜᴇᴀᴅꜱ ᴀʀᴇ ʀᴇᴍᴏᴠᴇᴅ. ᴘʀᴏɢʀᴇꜱꜱ ɪꜱ ᴋᴇᴘᴛ."
+  confirm-end-no-name: "<#f2ebd7>Keep Running"
+  confirm-end-no-lore: ""
+  confirm-archive-title: "Archive This Hunt?"
+  confirm-archive-yes-name: "<#C27B6B>Archive"
+  confirm-archive-yes-lore:
+    - "<#f2ebd7>ʜɪᴅᴅᴇɴ ꜰʀᴏᴍ ʟɪꜱᴛꜱ. ʜɪꜱᴛᴏʀʏ ɪꜱ ᴋᴇᴘᴛ."
+  confirm-archive-no-name: "<#f2ebd7>Cancel"
+  confirm-archive-no-lore: ""
+  confirm-remove-head-title: "Remove This Head?"
+  confirm-remove-head-yes-name: "<#C27B6B>Remove"
+  confirm-remove-head-yes-lore:
+    - "<#f2ebd7>ᴀʀᴄʜɪᴠᴇᴅ, ꜱᴏ ꜰɪɴᴅꜱ ᴀʀᴇ ᴋᴇᴘᴛ."
+  confirm-remove-head-no-name: "<#f2ebd7>Cancel"
+  confirm-remove-head-no-lore: ""
+  confirm-remove-milestone-title: "Remove This Milestone?"
+  confirm-remove-milestone-yes-name: "<#C27B6B>Remove"
+  confirm-remove-milestone-yes-lore:
+    - "<#f2ebd7>ɪᴛꜱ ʀᴇᴡᴀʀᴅꜱ ɢᴏ ᴡɪᴛʜ ɪᴛ."
+  confirm-remove-milestone-no-name: "<#f2ebd7>Cancel"
+  confirm-remove-milestone-no-lore: ""
+  replace-skin-title: "Update Placed Heads?"
+  replace-skin-yes-name: "<#8FAA87>Update All"
+  replace-skin-yes-lore:
+    - "<#f2ebd7>ᴇᴠᴇʀʏ ʜᴇᴀᴅ ᴡɪᴛʜ ᴛʜᴇ ᴏʟᴅ ꜱᴋɪɴ ᴄʜᴀɴɢᴇꜱ."
+  replace-skin-no-name: "<#f2ebd7>New Heads Only"
+  replace-skin-no-lore:
+    - "<#f2ebd7>ᴘʟᴀᴄᴇᴅ ʜᴇᴀᴅꜱ ᴋᴇᴇᴘ ᴛʜᴇ ᴏʟᴅ ꜱᴋɪɴ."
+
+# ============================================================
+# COMMAND MESSAGES
+# ============================================================
+# Flat strings, always delivered via chat
+commands:
+  reload-success: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴏᴀᴋʜᴜɴᴛ ᴄᴏɴꜰɪɢ <#8FAA87>ʀᴇʟᴏᴀᴅᴇᴅ<#f2ebd7>!"
+  reload-failed: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ʀᴇʟᴏᴀᴅ <#C27B6B>ꜰᴀɪʟᴇᴅ<#f2ebd7>. ᴄʜᴇᴄᴋ ᴄᴏɴꜱᴏʟᴇ."
+  no-permission: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ʏᴏᴜ <#C27B6B>ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪꜱꜱɪᴏɴ<#f2ebd7> ꜰᴏʀ ᴛʜᴀᴛ."
+  players-only: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ʏᴏᴜ <#C27B6B>ᴄᴀɴ ᴏɴʟʏ ᴜꜱᴇ ᴛʜɪꜱ ɪɴ ɢᴀᴍᴇ<#f2ebd7>!"
+  hunt-not-found: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ɴᴏ ʜᴜɴᴛ <#C27B6B>ᴄᴀʟʟᴇᴅ<#f2ebd7> <#FCD472><hunt_id><#f2ebd7>."
+  hunt-exists: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ᴀ ʜᴜɴᴛ <#C27B6B>ᴀʟʀᴇᴀᴅʏ ᴇxɪꜱᴛꜱ<#f2ebd7> ᴡɪᴛʜ ɪᴅ <#FCD472><hunt_id><#f2ebd7> (ᴀʀᴄʜɪᴠᴇᴅ ʜᴜɴᴛꜱ ᴋᴇᴇᴘ ᴛʜᴇɪʀ ɪᴅ)."
+  invalid-hunt-id: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7><#FCD472><hunt_id> <#C27B6B>ɪꜱɴ'ᴛ ᴀ ᴠᴀʟɪᴅ ɪᴅ<#f2ebd7>. ᴜꜱᴇ ʟᴏᴡᴇʀᴄᴀꜱᴇ ʟᴇᴛᴛᴇʀꜱ, ɴᴜᴍʙᴇʀꜱ ᴀɴᴅ ʜʏᴘʜᴇɴꜱ."
+  hunt-created: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴄʀᴇᴀᴛᴇᴅ <hunt><#f2ebd7>. ᴀᴅᴅ ᴀ ꜱᴋɪɴ, ᴛʜᴇɴ <click:suggest_command:'/headhunt edit {hunt_id}'><#FCD472>[/headhunt edit <hunt_id>]</click><#f2ebd7>."
+  hunt-updated: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴜᴘᴅᴀᴛᴇᴅ <hunt><#f2ebd7>."
+  hunt-archived: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴀʀᴄʜɪᴠᴇᴅ <hunt><#f2ebd7>. ɪᴛꜱ ʀᴜɴꜱ ᴀɴᴅ ʀᴇꜱᴜʟᴛꜱ ᴀʀᴇ ᴋᴇᴘᴛ."
+  confirm-delete: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴀʀᴄʜɪᴠᴇ <hunt><#f2ebd7>? ʜɪꜱᴛᴏʀʏ ɪꜱ ᴋᴇᴘᴛ. <click:run_command:'/headhunt delete {hunt_id} confirm'><#FCD472>[ᴄᴏɴꜰɪʀᴍ]</click>"
+  list-empty: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ɴᴏ ʜᴜɴᴛꜱ ʏᴇᴛ. ᴄʀᴇᴀᴛᴇ ᴏɴᴇ ᴡɪᴛʜ /headhunt create <id>."
+  list-header: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ʜᴜɴᴛꜱ <#6C757D>(<count>)"
+  list-line: "<#6C757D> · <hunt> <#6C757D>(<hunt_id>) <#f2ebd7><state><#6C757D>, <#f2ebd7><heads> ʜᴇᴀᴅꜱ <#6C757D>(<total> ᴄᴏᴜɴᴛɪɴɢ)"
+  top-header: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <hunt> <#f2ebd7>ᴛᴏᴘ ʜᴜɴᴛᴇʀꜱ <#6C757D>(ʀᴜɴ <run>)"
+  top-line: "<#6C757D> <rank>. <#DDB67D><player> <#6C757D>· <#B8E6D5><found>"
+  top-you: "<#6C757D> ʏᴏᴜ ᴀʀᴇ <#f2ebd7>#<rank>"
+  top-empty: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ɴᴏʙᴏᴅʏ ʜᴀꜱ ꜰᴏᴜɴᴅ ᴀ ʜᴇᴀᴅ ɪɴ <hunt> <#f2ebd7>ʏᴇᴛ."
+  edit-on: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴇᴅɪᴛ ᴍᴏᴅᴇ <#8FAA87>ᴏɴ<#f2ebd7> ꜰᴏʀ <hunt><#f2ebd7>. ᴘʟᴀᴄᴇ ʜᴇᴀᴅꜱ, ꜱɴᴇᴀᴋ + ʟᴇꜰᴛ-ᴄʟɪᴄᴋ ᴛᴏ ʀᴇᴍᴏᴠᴇ, ʀɪɢʜᴛ-ᴄʟɪᴄᴋ ꜰᴏʀ ᴏᴘᴛɪᴏɴꜱ. ᴏɴʟʏ ʏᴏᴜ ꜱᴇᴇ ᴛʜᴇ ᴘʀᴇᴠɪᴇᴡꜱ."
+  edit-off: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴇᴅɪᴛ ᴍᴏᴅᴇ <#C27B6B>ᴏꜰꜰ<#f2ebd7> ꜰᴏʀ <hunt><#f2ebd7>."
+  edit-usage: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴜꜱᴇ /headhunt edit <hunt> ᴛᴏ ꜱᴛᴀʀᴛ ᴇᴅɪᴛɪɴɢ."
+  placer-given: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ʜᴇʀᴇ'ꜱ ᴀ ᴘʟᴀᴄᴇʀ ꜰᴏʀ <hunt><#f2ebd7>."
+  placer-edit-reminder: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ɪᴛ ᴏɴʟʏ ᴘʟᴀᴄᴇꜱ ɪɴ ᴇᴅɪᴛ ᴍᴏᴅᴇ: <click:run_command:'/headhunt edit {hunt_id}'><#FCD472>[ᴇɴᴛᴇʀ ᴇᴅɪᴛ ᴍᴏᴅᴇ]</click>"
+  no-skins: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <hunt> <#C27B6B>ʜᴀꜱ ɴᴏ ꜱᴋɪɴꜱ ʏᴇᴛ<#f2ebd7>. ʜᴏʟᴅ ᴀ ʜᴇᴀᴅ ᴀɴᴅ ʀᴜɴ /headhunt skin <hunt_id> add."
+  skin-not-in-set: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ꜱᴋɪɴ <#FCD472><input> <#C27B6B>ɪꜱɴ'ᴛ ɪɴ ᴛʜɪꜱ ʜᴜɴᴛ'ꜱ ꜱᴇᴛ<#f2ebd7>."
+  skins-header: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <hunt> <#f2ebd7>ꜱᴋɪɴꜱ <#6C757D>(<count>)"
+  skins-line: "<#6C757D> #<id> <#f2ebd7><label> <#6C757D>· ᴜꜱᴇᴅ ʙʏ <used> ʜᴇᴀᴅꜱ"
+  skin-added: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ꜱᴋɪɴ <#8FAA87>ᴀᴅᴅᴇᴅ<#f2ebd7> ᴛᴏ <hunt><#f2ebd7>."
+  skin-removed: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ꜱᴋɪɴ <#FCD472>#<id> <#f2ebd7>ʀᴇᴍᴏᴠᴇᴅ ꜰʀᴏᴍ ᴛʜᴇ ꜱᴇᴛ. ᴘʟᴀᴄᴇᴅ ʜᴇᴀᴅꜱ ᴋᴇᴇᴘ ɪᴛ."
+  skin-replaced: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ꜱᴋɪɴ ʀᴇᴘʟᴀᴄᴇᴅ. <#B8E6D5><count> <#f2ebd7>ᴘʟᴀᴄᴇᴅ ʜᴇᴀᴅꜱ ᴜᴘᴅᴀᴛᴇᴅ."
+  skin-not-found: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ɴᴏ ꜱᴋɪɴ <#C27B6B>ꜰᴏᴜɴᴅ ꜰᴏʀ<#f2ebd7> <#FCD472><input><#f2ebd7>."
+  hold-a-head: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ʜᴏʟᴅ ᴀ <#C27B6B>ᴘʟᴀʏᴇʀ ʜᴇᴀᴅ ᴡɪᴛʜ ᴀ ꜱᴋɪɴ<#f2ebd7> ɪɴ ʏᴏᴜʀ ᴍᴀɪɴ ʜᴀɴᴅ."
+  hold-an-item: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ʜᴏʟᴅ ᴛʜᴇ <#C27B6B>ɪᴛᴇᴍ ᴛᴏ ᴀᴅᴅ<#f2ebd7> ɪɴ ʏᴏᴜʀ ᴍᴀɪɴ ʜᴀɴᴅ."
+  held-item-is-custom: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ᴛʜᴀᴛ'ꜱ ᴀɴ <#C27B6B>ᴇɪ ᴏʀ ɴᴇxᴏ ɪᴛᴇᴍ<#f2ebd7>. ᴀᴅᴅ ɪᴛ ʙʏ ɪᴅ ꜱᴏ ɪᴛ ꜱᴛᴀʏꜱ ᴜᴘ ᴛᴏ ᴅᴀᴛᴇ."
+  head-skin-changed: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ʜᴇᴀᴅ <#B8E6D5>#<number> <#f2ebd7>ʜᴀꜱ ᴀ ɴᴇᴡ ꜱᴋɪɴ."
+  clue-needs-edit: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ᴄʟᴜᴇꜱ <#C27B6B>ɴᴇᴇᴅ ᴇᴅɪᴛ ᴍᴏᴅᴇ<#f2ebd7>."
+  clue-look-at-head: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ʟᴏᴏᴋ ᴀᴛ ᴏɴᴇ ᴏꜰ <#C27B6B>ᴛʜɪꜱ ʜᴜɴᴛ'ꜱ ʜᴇᴀᴅꜱ<#f2ebd7> ꜰɪʀꜱᴛ."
+  clue-set: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴄʟᴜᴇ ꜰᴏʀ ʜᴇᴀᴅ <#B8E6D5>#<number> <#f2ebd7>ꜱᴀᴠᴇᴅ."
+  check-running: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴄʜᴇᴄᴋɪɴɢ <#B8E6D5><count> <#f2ebd7>ꜱᴘᴏᴛꜱ ꜰᴏʀ <hunt><#f2ebd7>..."
+  check-clear: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴇᴠᴇʀʏ ꜱᴘᴏᴛ ɪɴ <hunt> <#f2ebd7>ɪꜱ <#8FAA87>ᴄʟᴇᴀʀ<#f2ebd7>."
+  check-conflicts: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#D89B6A><count> ꜱᴘᴏᴛꜱ ʙʟᴏᴄᴋᴇᴅ <#f2ebd7>ɪɴ <hunt><#f2ebd7>:"
+  conflict-line: "<#6C757D> · <#f2ebd7>ʜᴇᴀᴅ <#B8E6D5>#<number> <#f2ebd7>ᴀᴛ <x>, <y>, <z> ʙʟᴏᴄᴋᴇᴅ ʙʏ <#D89B6A><block> <click:run_command:'/headhunt tp {head_id}'><#FCD472>[ᴛᴇʟᴇᴘᴏʀᴛ]</click> <click:run_command:'/headhunt removehead {head_id}'><#FCD472>[ʀᴇᴍᴏᴠᴇ]</click> <click:run_command:'/headhunt forceplace {head_id}'><#FCD472>[ꜰᴏʀᴄᴇ ᴘʟᴀᴄᴇ]</click>"
+  conflicts-on-join: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#D89B6A><count> ʜᴇᴀᴅꜱ ᴀʀᴇ ʙʟᴏᴄᴋᴇᴅ <#f2ebd7>ɪɴ <hunt><#f2ebd7>. <click:run_command:'/headhunt conflicts {hunt_id}'><#FCD472>[ᴠɪᴇᴡ]</click>"
+  head-not-found: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ɴᴏ ʜᴇᴀᴅ <#C27B6B>ᴡɪᴛʜ ɪᴅ<#f2ebd7> <#FCD472><input><#f2ebd7>."
+  head-removed-gui: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ʀᴇᴍᴏᴠᴇᴅ ʜᴇᴀᴅ <#B8E6D5>#<number> <#f2ebd7>ꜰʀᴏᴍ <hunt><#f2ebd7>."
+  force-placed: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ʜᴇᴀᴅ <#B8E6D5>#<number> <#f2ebd7>ɪꜱ ɴᴏ ʟᴏɴɢᴇʀ ʙʟᴏᴄᴋᴇᴅ."
+  undone: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴜɴᴅɪᴅ ᴛʜᴇ ᴄʜᴀɴɢᴇ ᴛᴏ ʜᴇᴀᴅ <#B8E6D5>#<number><#f2ebd7>."
+  nothing-to-undo: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ᴛʜᴇʀᴇ'ꜱ <#C27B6B>ɴᴏᴛʜɪɴɢ ᴛᴏ ᴜɴᴅᴏ<#f2ebd7>."
+  already-active: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <hunt> <#C27B6B>ɪꜱ ᴀʟʀᴇᴀᴅʏ ʀᴜɴɴɪɴɢ<#f2ebd7>."
+  not-active: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <hunt> <#C27B6B>ɪꜱɴ'ᴛ ʀᴜɴɴɪɴɢ<#f2ebd7>."
+  no-heads: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <hunt> <#C27B6B>ʜᴀꜱ ɴᴏ ʜᴇᴀᴅꜱ<#f2ebd7> ᴛᴏ ꜱᴛᴀʀᴛ ᴡɪᴛʜ."
+  choose-run-console: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴛʜɪꜱ ʜᴜɴᴛ ʜᴀꜱ ʀᴜɴ ʙᴇꜰᴏʀᴇ. ᴜꜱᴇ /headhunt start <hunt_id> new ᴏʀ continue."
+  started-new: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <hunt> <#8FAA87>ꜱᴛᴀʀᴛᴇᴅ<#f2ebd7> ᴡɪᴛʜ ᴀ ɴᴇᴡ ʀᴜɴ: <#B8E6D5><total> <#f2ebd7>ʜᴇᴀᴅꜱ."
+  started-continued: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <hunt> <#8FAA87>ꜱᴛᴀʀᴛᴇᴅ<#f2ebd7>, ᴄᴏɴᴛɪɴᴜɪɴɢ ᴛʜᴇ ʟᴀꜱᴛ ʀᴜɴ: <#B8E6D5><total> <#f2ebd7>ʜᴇᴀᴅꜱ."
+  start-scheduled: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <hunt> <#f2ebd7>ꜱᴛᴀʀᴛꜱ <#FCD472><time> <#6C757D>(ɪɴ <countdown>)"
+  end-scheduled: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <hunt> <#f2ebd7>ᴇɴᴅꜱ <#FCD472><time> <#6C757D>(ɪɴ <countdown>)"
+  ended: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <hunt> <#C27B6B>ᴇɴᴅᴇᴅ<#f2ebd7>. ʜᴇᴀᴅꜱ ʀᴇᴍᴏᴠᴇᴅ, ᴘʀᴏɢʀᴇꜱꜱ ᴋᴇᴘᴛ."
+  schedule-cancelled: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ꜱᴄʜᴇᴅᴜʟᴇ ꜰᴏʀ <hunt> <#f2ebd7>ᴄᴀɴᴄᴇʟʟᴇᴅ."
+  nothing-scheduled: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <hunt> <#C27B6B>ʜᴀꜱ ɴᴏᴛʜɪɴɢ ꜱᴄʜᴇᴅᴜʟᴇᴅ<#f2ebd7>."
+  invalid-date: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#FCD472><input> <#C27B6B>ɪꜱɴ'ᴛ ᴀ ᴅᴀᴛᴇ<#f2ebd7>. ᴜꜱᴇ 2026-10-31 18:00 (ᴜᴛᴄ) ᴏʀ +2h, +3d."
+  date-in-past: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#FCD472><time> <#C27B6B>ɪꜱ ɪɴ ᴛʜᴇ ᴘᴀꜱᴛ<#f2ebd7>."
+  player-not-found: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ɴᴏ ᴘʟᴀʏᴇʀ <#C27B6B>ᴄᴀʟʟᴇᴅ<#f2ebd7> <#FCD472><player><#f2ebd7>."
+  player-info: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#DDB67D><player> <#f2ebd7>ɪɴ <hunt> <#6C757D>(ʀᴜɴ <run>)<#f2ebd7>: <#B8E6D5><found>/<total><#f2ebd7>, ʀᴀɴᴋ <rank>, ᴄᴏᴍᴘʟᴇᴛᴇᴅ <completed>"
+  player-reset: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ʀᴇꜱᴇᴛ <#DDB67D><player><#f2ebd7>'ꜱ ᴘʀᴏɢʀᴇꜱꜱ ɪɴ <hunt><#f2ebd7>."
+  player-granted: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#DDB67D><player> <#f2ebd7>ɴᴏᴡ ʜᴀꜱ <#B8E6D5><found>/<total> <#f2ebd7>ɪɴ <hunt><#f2ebd7>."
+  player-granted-offline: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#DDB67D><player> <#f2ebd7>ɴᴏᴡ ʜᴀꜱ <#B8E6D5><found>/<total><#f2ebd7>. ᴛʜᴇʏ'ʀᴇ ᴏꜰꜰʟɪɴᴇ, ꜱᴏ ʀᴇᴡᴀʀᴅꜱ ᴘᴀʏ ᴡʜᴇɴ ᴛʜᴇʏ ɴᴇxᴛ ᴊᴏɪɴ."
+  test-paid: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴛᴇꜱᴛ ᴘᴀʏᴏᴜᴛ ꜰᴏʀ ᴍɪʟᴇꜱᴛᴏɴᴇ <#B8E6D5><milestone> <#f2ebd7>ɢɪᴠᴇɴ (ɴᴏᴛ ʀᴇᴄᴏʀᴅᴇᴅ)."
+  reward-added: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ʀᴇᴡᴀʀᴅ <#8FAA87>ᴀᴅᴅᴇᴅ<#f2ebd7>."
+  unknown-item-id: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ɴᴏ ɪᴛᴇᴍ <#C27B6B>ᴡɪᴛʜ ɪᴅ<#f2ebd7> <#FCD472><input><#f2ebd7>."
+  integration-missing: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#FCD472><plugin> <#C27B6B>ɪꜱɴ'ᴛ ᴀᴠᴀɪʟᴀʙʟᴇ<#f2ebd7>."
+  command-rewards-owner-only: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ᴄᴏᴍᴍᴀɴᴅ ʀᴇᴡᴀʀᴅꜱ <#C27B6B>ᴀʀᴇ ᴏᴡɴᴇʀ ᴏɴʟʏ<#f2ebd7>, ꜱɪɴᴄᴇ ᴛʜᴇʏ ʀᴜɴ ᴀꜱ ᴄᴏɴꜱᴏʟᴇ. ᴄʀᴀᴛᴇ ᴋᴇʏꜱ ʜᴀᴠᴇ ᴛʜᴇɪʀ ᴏᴡɴ ᴛʏᴘᴇ."
+  invalid-amount: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#FCD472><input> <#C27B6B>ɪꜱɴ'ᴛ ᴀ ᴠᴀʟɪᴅ ɴᴜᴍʙᴇʀ<#f2ebd7>."
+  invalid-milestone: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#FCD472><input> <#C27B6B>ɪꜱɴ'ᴛ ᴀ ᴍɪʟᴇꜱᴛᴏɴᴇ<#f2ebd7>. ᴛʏᴘᴇ ᴀ ɴᴜᴍʙᴇʀ ᴏꜰ ꜰɪɴᴅꜱ, ᴏʀ all."
+  milestone-exists: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ᴍɪʟᴇꜱᴛᴏɴᴇ <#FCD472><input> <#C27B6B>ᴀʟʀᴇᴀᴅʏ ᴇxɪꜱᴛꜱ<#f2ebd7>."
+  import-missing: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ɴᴏ ɪᴍᴘᴏʀᴛ ꜰɪʟᴇ <#C27B6B>ɴᴀᴍᴇᴅ<#f2ebd7> <#FCD472><file><#f2ebd7> ɪɴ plugins/OakHunt/import."
+  import-failed: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ɪᴍᴘᴏʀᴛ <#C27B6B>ꜰᴀɪʟᴇᴅ<#f2ebd7>: <reason>"
+  import-done: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ɪᴍᴘᴏʀᴛᴇᴅ <hunt><#f2ebd7>: <#B8E6D5><heads> <#f2ebd7>ʜᴇᴀᴅꜱ, <#B8E6D5><results> <#f2ebd7>ᴘʟᴀʏᴇʀ ʀᴇꜱᴜʟᴛꜱ."
+  prompt-cancel-hint: "<#6C757D>ᴛʏᴘᴇ cancel ᴛᴏ ꜱᴛᴏᴘ."
+  prompt-hunt-id: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴛʏᴘᴇ ᴛʜᴇ ɴᴇᴡ ʜᴜɴᴛ'ꜱ ɪᴅ ɪɴ ᴄʜᴀᴛ, ᴇ.ɢ. halloween."
+  prompt-date: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴛʏᴘᴇ ᴀ ᴛɪᴍᴇ ɪɴ ᴜᴛᴄ, ᴇ.ɢ. 2026-10-31 18:00, ᴏʀ +2h."
+  prompt-rename: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴛʏᴘᴇ ᴛʜᴇ ᴅɪꜱᴘʟᴀʏ ɴᴀᴍᴇ. ᴄᴏʟᴏᴜʀꜱ ᴡᴏʀᴋ, ᴇ.ɢ. \\<#B5835A>Acorn Hunt."
+  prompt-description: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴛʏᴘᴇ ᴛʜᴇ ᴊᴏᴜʀɴᴀʟ ᴅᴇꜱᴄʀɪᴘᴛɪᴏɴ, ᴏʀ clear."
+  prompt-clue: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴛʏᴘᴇ ᴛʜᴇ ᴄʟᴜᴇ, ᴏʀ clear."
+  prompt-clue-every: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴜɴʟᴏᴄᴋ ᴏɴᴇ ᴄʟᴜᴇ ᴇᴠᴇʀʏ ʜᴏᴡ ᴍᴀɴʏ ꜰɪɴᴅꜱ?"
+  prompt-skin-source: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴛʏᴘᴇ ᴀ ʜᴇᴀᴅᴅᴀᴛᴀʙᴀꜱᴇ ɪᴅ, ᴀ ᴘʟᴀʏᴇʀ ɴᴀᴍᴇ ᴏʀ ᴜᴜɪᴅ, ᴏʀ ᴀ ᴛᴇxᴛᴜʀᴇ ᴠᴀʟᴜᴇ."
+  prompt-milestone: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴛʏᴘᴇ ᴛʜᴇ ɴᴜᴍʙᴇʀ ᴏꜰ ꜰɪɴᴅꜱ, ᴏʀ all ꜰᴏʀ ᴄᴏᴍᴘʟᴇᴛɪᴏɴ."
+  prompt-milestone-message: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴛʏᴘᴇ ᴛʜᴇ ᴍᴇꜱꜱᴀɢᴇ, ᴏʀ default. ᴘʟᴀᴄᴇʜᴏʟᴅᴇʀꜱ: \\<found>, \\<total>, \\<hunt>, \\<player>."
+  prompt-broadcast: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴛʏᴘᴇ ᴛʜᴇ ʙʀᴏᴀᴅᴄᴀꜱᴛ ᴇᴠᴇʀʏᴏɴᴇ ꜱᴇᴇꜱ, ᴏʀ default."
+  prompt-item-id: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴛʏᴘᴇ ᴛʜᴇ ɪᴛᴇᴍ ɪᴅ ᴀɴᴅ ᴀᴍᴏᴜɴᴛ, ᴇ.ɢ. acorn_hat_voucher 1."
+  prompt-amount: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴛʏᴘᴇ ᴛʜᴇ ᴀᴍᴏᴜɴᴛ."
+  prompt-command: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴛʏᴘᴇ ᴛʜᴇ ᴄᴏɴꜱᴏʟᴇ ᴄᴏᴍᴍᴀɴᴅ. {player} ʙᴇᴄᴏᴍᴇꜱ ᴛʜᴇ ᴘʟᴀʏᴇʀ'ꜱ ɴᴀᴍᴇ."
