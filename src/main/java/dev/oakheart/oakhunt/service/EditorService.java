@@ -44,6 +44,8 @@ import java.util.logging.Level;
 public class EditorService {
 
     private static final int UNDO_LIMIT = 50;
+    private static final long NEARBY_RESEND_MS = 3000;
+    private static final double NEARBY_RESEND_RADIUS = 12;
 
     private final OakHunt plugin;
     private final Map<UUID, Session> sessions = new HashMap<>();
@@ -61,6 +63,7 @@ public class EditorService {
         private final Map<Integer, String> labelTexts = new HashMap<>();
         private final Set<Integer> fakes = new HashSet<>();
         private final Deque<Undo> undo = new ArrayDeque<>();
+        private long lastNearbyResend;
 
         private Session(String huntId) {
             this.huntId = huntId;
@@ -278,6 +281,7 @@ public class EditorService {
                 sendReal(player, head);
             });
         }
+        if (!hunt.isActive()) refreshNearbyFakes(player, session);
         plugin.getMessages().send(player, "edit-actionbar", Messages.hunt(hunt),
                 Messages.text("count", plugin.getHuntManager().heads(hunt).size()),
                 Messages.text("state", plugin.getHuntManager().state(hunt).key()));
@@ -290,22 +294,58 @@ public class EditorService {
             return;
         }
         if (session.fakes.contains(head.getId())) return;
+        sendFake(player, block.getLocation(), head);
+        session.fakes.add(head.getId());
+        previewIndex.computeIfAbsent(player.getUniqueId(), k -> new ConcurrentHashMap<>())
+                .put(pack(head.getX(), head.getY(), head.getZ()), head.getId());
+    }
+
+    private void sendFake(Player player, Location location, Head head) {
         BlockData data;
         try {
             data = Bukkit.createBlockData(head.getBlockData());
         } catch (IllegalArgumentException e) {
             data = Bukkit.createBlockData(Material.PLAYER_HEAD);
         }
-        Location location = block.getLocation();
         player.sendBlockChange(location, data);
         BlockState state = data.createBlockState();
         if (state instanceof Skull skull) {
             SkinUtil.apply(skull, head.getTexture());
             player.sendBlockUpdate(location, skull);
         }
-        session.fakes.add(head.getId());
-        previewIndex.computeIfAbsent(player.getUniqueId(), k -> new ConcurrentHashMap<>())
-                .put(pack(head.getX(), head.getY(), head.getZ()), head.getId());
+    }
+
+    /**
+     * Re-sends fake heads close to the editor every few seconds. A client can drop a fake block
+     * whenever the server sends it that position (a cancelled placement's revert, a neighbour
+     * update), and the editor is most likely to be looking at the ones nearby.
+     */
+    private void refreshNearbyFakes(Player player, Session session) {
+        long now = System.currentTimeMillis();
+        if (now - session.lastNearbyResend < NEARBY_RESEND_MS) return;
+        session.lastNearbyResend = now;
+        Location at = player.getLocation();
+        for (int id : session.fakes) {
+            Head head = plugin.getHuntManager().head(id).orElse(null);
+            if (head == null) continue;
+            double dx = head.getX() + 0.5 - at.getX();
+            double dy = head.getY() + 0.5 - at.getY();
+            double dz = head.getZ() + 0.5 - at.getZ();
+            if (dx * dx + dy * dy + dz * dz > NEARBY_RESEND_RADIUS * NEARBY_RESEND_RADIUS) continue;
+            Block block = player.getWorld().getBlockAt(head.getX(), head.getY(), head.getZ());
+            if (plugin.getConfigManager().isReplaceable(block.getType())) sendFake(player, block.getLocation(), head);
+        }
+    }
+
+    /** Re-sends a just-placed head's preview a few ticks later, after the placement revert lands. */
+    public void resendSoon(Head head) {
+        for (long delay : new long[]{2L, 10L}) {
+            Bukkit.getScheduler().runTaskLater(plugin, () -> forSessions(head.getHuntId(), (player, session) -> {
+                if (!session.fakes.contains(head.getId())) return;
+                Block block = player.getWorld().getBlockAt(head.getX(), head.getY(), head.getZ());
+                if (plugin.getConfigManager().isReplaceable(block.getType())) sendFake(player, block.getLocation(), head);
+            }), delay);
+        }
     }
 
     private void sendReal(Player player, Head head) {

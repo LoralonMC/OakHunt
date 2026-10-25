@@ -13,7 +13,7 @@ public class Head {
     private final int z;
     private String blockData;
     private String texture;
-    private final int number;
+    private int number;
     private String clue;
     private boolean archived;
     private boolean conflict;
@@ -49,6 +49,7 @@ public class Head {
     public String getTexture() { return texture; }
     public void setTexture(String texture) { this.texture = texture; }
     public int getNumber() { return number; }
+    public void setNumber(int number) { this.number = number; }
     public String getClue() { return clue; }
     public void setClue(String clue) { this.clue = clue; }
     public boolean isArchived() { return archived; }

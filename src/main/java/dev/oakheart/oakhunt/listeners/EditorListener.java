@@ -66,6 +66,7 @@ public class EditorListener implements Listener {
             if (plugin.getHuntManager().headAt(block) != null) return;
             Head head = plugin.getHuntManager().addHead(editing, block, blockData, texture, player.getName());
             plugin.getEditorService().pushUndo(player, head, true);
+            plugin.getEditorService().resendSoon(head);
             plugin.getMessages().send(player, "head-added", Messages.hunt(editing),
                     Messages.text("number", head.getNumber()));
         });

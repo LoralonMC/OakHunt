@@ -311,8 +311,7 @@ public class HuntManager {
     }
 
     public Head addHead(Hunt hunt, Block block, String blockData, String texture, String actor) {
-        int number = headsByHunt.getOrDefault(hunt.getId(), List.of()).stream()
-                .mapToInt(Head::getNumber).max().orElse(0) + 1;
+        int number = nextFreeNumber(hunt.getId());
         Head head = new Head(db.nextId("heads"), hunt.getId(), block.getWorld().getName(),
                 block.getX(), block.getY(), block.getZ(), blockData, texture, number, null,
                 false, false, actor, System.currentTimeMillis());
@@ -352,6 +351,11 @@ public class HuntManager {
         BlockKey key = BlockKey.of(head);
         Head occupant = headsByBlock.get(key);
         if (occupant != null && occupant != head) return false;
+        if (headsByHunt.getOrDefault(head.getHuntId(), List.of()).stream()
+                .anyMatch(other -> other != head && !other.isArchived() && other.getNumber() == head.getNumber())) {
+            head.setNumber(nextFreeNumber(head.getHuntId()));
+            headsByHunt.get(head.getHuntId()).sort(Comparator.comparingInt(Head::getNumber));
+        }
         head.setArchived(false);
         headsByBlock.put(key, head);
         db.saveHead(head);
@@ -378,6 +382,17 @@ public class HuntManager {
         db.saveHead(head);
         db.audit(actor, head.getHuntId(), "clue", "#" + head.getNumber());
         plugin.getEditorService().refreshHead(head);
+    }
+
+    /** Lowest number not used by a live (non-archived) head, so a hunt stays numbered 1 to N. */
+    private int nextFreeNumber(String huntId) {
+        java.util.Set<Integer> used = new java.util.HashSet<>();
+        for (Head head : headsByHunt.getOrDefault(huntId, List.of())) {
+            if (!head.isArchived()) used.add(head.getNumber());
+        }
+        int number = 1;
+        while (used.contains(number)) number++;
+        return number;
     }
 
     private void index(Head head) {
