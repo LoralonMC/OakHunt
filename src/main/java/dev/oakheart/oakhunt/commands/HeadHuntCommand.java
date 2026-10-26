@@ -154,10 +154,11 @@ public class HeadHuntCommand {
                                         .then(Commands.literal("grant")
                                                 .then(Commands.literal("all")
                                                         .executes(ctx -> playerCmd(ctx, "grant", Integer.MAX_VALUE, false))
-                                                        .then(Commands.literal("pay").executes(ctx -> playerCmd(ctx, "grant", Integer.MAX_VALUE, true))))
+                                                        .then(Commands.literal("pay").requires(perm("oakhunt.rewards.pay"))
+                                                                .executes(ctx -> playerCmd(ctx, "grant", Integer.MAX_VALUE, true))))
                                                 .then(Commands.argument("amount", IntegerArgumentType.integer(1))
                                                         .executes(ctx -> playerCmd(ctx, "grant", IntegerArgumentType.getInteger(ctx, "amount"), false))
-                                                        .then(Commands.literal("pay").executes(ctx ->
+                                                        .then(Commands.literal("pay").requires(perm("oakhunt.rewards.pay")).executes(ctx ->
                                                                 playerCmd(ctx, "grant", IntegerArgumentType.getInteger(ctx, "amount"), true))))))))
                 .then(Commands.literal("delete")
                         .requires(perm("oakhunt.admin"))

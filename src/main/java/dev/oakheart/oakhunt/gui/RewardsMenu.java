@@ -34,6 +34,10 @@ public class RewardsMenu extends Menu {
             Milestone milestone = milestones.get(i);
             set(i, icon(plugin, milestone), e -> {
                 if (e.isShiftClick() && e.isLeftClick()) {
+                    if (!viewer.hasPermission("oakhunt.rewards.pay")) {
+                        plugin.getMessages().cmd(viewer, "test-pay-owner-only");
+                        return;
+                    }
                     int total = plugin.getHuntManager().liveTotal(hunt);
                     plugin.getRewardService().pay(viewer, hunt, milestone,
                             milestone.isAll() ? total : milestone.getThreshold(), total);

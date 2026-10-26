@@ -42,6 +42,7 @@ permissions:
       oakhunt.manage: true
       oakhunt.player: true
       oakhunt.rewards.commands: true
+      oakhunt.rewards.pay: true
       oakhunt.admin: true
   oakhunt.use:
     description: 'Find heads, open the journal and leaderboards'
@@ -57,6 +58,9 @@ permissions:
     default: op
   oakhunt.rewards.commands:
     description: 'Add or change console-command rewards (runs as console)'
+    default: op
+  oakhunt.rewards.pay:
+    description: 'Pay rewards outside a real find: test payouts and player grants with pay'
     default: op
   oakhunt.admin:
     description: 'Archive hunts, reload, import past hunts'

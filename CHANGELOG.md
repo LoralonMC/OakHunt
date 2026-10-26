@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-10-26
+
+### Changed
+
+- Test payouts and `grant ... pay` need the new `oakhunt.rewards.pay` permission (OP by default), so reward managers can't pay rewards to themselves without a find
+
 ## [1.0.0] - 2026-10-26
 
 ### Added

@@ -571,6 +571,7 @@ commands:
   player-granted: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#DDB67D><player> <#f2ebd7>ɴᴏᴡ ʜᴀꜱ <#B8E6D5><found>/<total> <#f2ebd7>ɪɴ <hunt><#f2ebd7>."
   player-granted-offline: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#DDB67D><player> <#f2ebd7>ɴᴏᴡ ʜᴀꜱ <#B8E6D5><found>/<total><#f2ebd7>. ᴛʜᴇʏ'ʀᴇ ᴏꜰꜰʟɪɴᴇ, ꜱᴏ ʀᴇᴡᴀʀᴅꜱ ᴘᴀʏ ᴡʜᴇɴ ᴛʜᴇʏ ɴᴇxᴛ ᴊᴏɪɴ."
   test-paid: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴛᴇꜱᴛ ᴘᴀʏᴏᴜᴛ ꜰᴏʀ ᴍɪʟᴇꜱᴛᴏɴᴇ <#B8E6D5><milestone> <#f2ebd7>ɢɪᴠᴇɴ (ɴᴏᴛ ʀᴇᴄᴏʀᴅᴇᴅ)."
+  test-pay-owner-only: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ᴛᴇꜱᴛ ᴘᴀʏᴏᴜᴛꜱ <#C27B6B>ᴀʀᴇ ᴏᴡɴᴇʀ ᴏɴʟʏ<#f2ebd7>, ꜱɪɴᴄᴇ ᴛʜᴇʏ ɢɪᴠᴇ ʀᴇᴡᴀʀᴅꜱ ᴡɪᴛʜᴏᴜᴛ ᴀ ꜰɪɴᴅ."
   reward-added: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ʀᴇᴡᴀʀᴅ <#8FAA87>ᴀᴅᴅᴇᴅ<#f2ebd7>."
   unknown-item-id: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ɴᴏ ɪᴛᴇᴍ <#C27B6B>ᴡɪᴛʜ ɪᴅ<#f2ebd7> <#FCD472><input><#f2ebd7>."
   integration-missing: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#FCD472><plugin> <#C27B6B>ɪꜱɴ'ᴛ ᴀᴠᴀɪʟᴀʙʟᴇ<#f2ebd7>."

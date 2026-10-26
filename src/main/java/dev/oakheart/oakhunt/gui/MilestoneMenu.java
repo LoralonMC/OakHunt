@@ -77,6 +77,10 @@ public class MilestoneMenu extends Menu {
             });
         });
         set(31, button(Material.EXPERIENCE_BOTTLE, "test-pay"), e -> {
+            if (!viewer.hasPermission("oakhunt.rewards.pay")) {
+                plugin.getMessages().cmd(viewer, "test-pay-owner-only");
+                return;
+            }
             int total = plugin.getHuntManager().liveTotal(hunt);
             plugin.getRewardService().pay(viewer, hunt, milestone, milestone.isAll() ? total : milestone.getThreshold(), total);
             plugin.getMessages().cmd(viewer, "test-paid", Messages.text("milestone", plugin.getRewardService().label(milestone)));

@@ -49,7 +49,7 @@ Head hunts run entirely in-game: built in edit mode, hidden until they start, an
 | `/headhunt start <hunt> [new\|continue] [date]` | Start now or schedule | `oakhunt.manage` |
 | `/headhunt end <hunt> [date]` | End now or schedule | `oakhunt.manage` |
 | `/headhunt cancel <hunt>` | Cancel a scheduled start or end | `oakhunt.manage` |
-| `/headhunt player <player> <hunt> info\|reset\|grant <n\|all> [pay]` | Support tools | `oakhunt.player` |
+| `/headhunt player <player> <hunt> info\|reset\|grant <n\|all> [pay]` | Support tools (`pay` also needs `oakhunt.rewards.pay`) | `oakhunt.player` |
 | `/headhunt delete <hunt>` | Archive a hunt | `oakhunt.admin` |
 | `/headhunt import <file>` | Import a past hunt from `plugins/OakHunt/import/` | `oakhunt.admin` |
 | `/headhunt reload` | Reload config and messages | `oakhunt.admin` |
@@ -63,6 +63,7 @@ Head hunts run entirely in-game: built in edit mode, hidden until they start, an
 | `oakhunt.manage` | Start, end, schedule; item and key rewards; hunt settings | OP |
 | `oakhunt.player` | View, reset or grant a player's progress | OP |
 | `oakhunt.rewards.commands` | Add or change console-command rewards | OP |
+| `oakhunt.rewards.pay` | Test payouts and `grant ... pay` (rewards without a real find) | OP |
 | `oakhunt.admin` | Archive hunts, reload, import | OP |
 | `oakhunt.*` | All of the above | OP |
 
