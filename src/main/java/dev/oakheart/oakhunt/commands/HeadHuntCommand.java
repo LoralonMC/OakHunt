@@ -69,11 +69,11 @@ public class HeadHuntCommand {
                         .then(Commands.argument("id", StringArgumentType.word())
                                 .executes(ctx -> create(ctx.getSource().getSender(), StringArgumentType.getString(ctx, "id")))))
                 .then(Commands.literal("edit")
-                        .requires(playerPerm("oakhunt.edit"))
+                        .requires(placePerm())
                         .executes(ctx -> player(ctx, this::exitEdit))
                         .then(huntArg().executes(ctx -> huntPlayer(ctx, this::toggleEdit))))
                 .then(Commands.literal("head")
-                        .requires(playerPerm("oakhunt.edit"))
+                        .requires(placePerm())
                         .then(huntArg()
                                 .executes(ctx -> huntPlayer(ctx, (p, hunt) -> givePlacer(p, hunt, "random")))
                                 .then(Commands.argument("skin", StringArgumentType.word())
@@ -105,7 +105,7 @@ public class HeadHuntCommand {
                         .requires(playerPerm("oakhunt.edit"))
                         .then(huntArg().executes(ctx -> huntPlayer(ctx, this::conflicts))))
                 .then(Commands.literal("undo")
-                        .requires(playerPerm("oakhunt.edit"))
+                        .requires(placePerm())
                         .executes(ctx -> player(ctx, this::undo)))
                 .then(Commands.literal("tp")
                         .requires(playerPerm("oakhunt.edit"))
@@ -223,6 +223,12 @@ public class HeadHuntCommand {
         return s -> s.getSender().hasPermission(permission);
     }
 
+    /** Editors, and hiders (oakhunt.place): edit mode, placers and undo. */
+    private static java.util.function.Predicate<CommandSourceStack> placePerm() {
+        return s -> s.getSender() instanceof Player
+                && (s.getSender().hasPermission("oakhunt.edit") || s.getSender().hasPermission("oakhunt.place"));
+    }
+
     private static java.util.function.Predicate<CommandSourceStack> playerPerm(String permission) {
         return s -> s.getSender() instanceof Player && s.getSender().hasPermission(permission);
     }
@@ -325,7 +331,8 @@ public class HeadHuntCommand {
             plugin.getMessages().cmd(player, "edit-off", Messages.hunt(hunt));
         } else {
             plugin.getEditorService().enter(player, hunt);
-            plugin.getMessages().cmd(player, "edit-on", Messages.hunt(hunt), Messages.huntId(hunt));
+            plugin.getMessages().cmd(player, plugin.getEditorService().isHider(player) ? "edit-on-hider" : "edit-on",
+                    Messages.hunt(hunt), Messages.huntId(hunt));
         }
     }
 

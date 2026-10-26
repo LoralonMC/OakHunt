@@ -21,6 +21,10 @@ public class EditorActions {
     public void click(Player player, Head head, boolean left) {
         Hunt hunt = plugin.getHuntManager().hunt(head.getHuntId()).orElse(null);
         if (hunt == null || head.isArchived()) return;
+        if (plugin.getEditorService().isHider(player)) {
+            hiderClick(player, hunt, head, left);
+            return;
+        }
         if (left && player.isSneaking()) {
             remove(player, hunt, head);
         } else if (left) {
@@ -29,6 +33,25 @@ public class EditorActions {
         } else {
             plugin.getEditorService().resendFake(player, head);
             plugin.getMenus().openHead(player, hunt, head);
+        }
+    }
+
+    /** Hiders see every head but may only remove their own, and get info instead of the head menu. */
+    private void hiderClick(Player player, Hunt hunt, Head head, boolean left) {
+        boolean own = player.getName().equalsIgnoreCase(head.getCreatedBy());
+        if (left && player.isSneaking() && own) {
+            remove(player, hunt, head);
+            return;
+        }
+        plugin.getEditorService().resendFake(player, head);
+        if (left && player.isSneaking()) {
+            plugin.getMessages().send(player, "hider-not-yours", Messages.text("number", head.getNumber()),
+                    Messages.text("placed_by", head.getCreatedBy() == null ? "-" : head.getCreatedBy()));
+        } else if (left) {
+            plugin.getMessages().send(player, "edit-remove-hint");
+        } else {
+            plugin.getMessages().send(player, "hider-head-info", Messages.text("number", head.getNumber()),
+                    Messages.text("placed_by", head.getCreatedBy() == null ? "-" : head.getCreatedBy()));
         }
     }
 

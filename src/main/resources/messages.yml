@@ -97,6 +97,15 @@ placer-no-skins:
 head-no-skin:
   text: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ᴛʜᴀᴛ ʜᴇᴀᴅ <#C27B6B>ʜᴀꜱ ɴᴏ ꜱᴋɪɴ<#f2ebd7>. ᴜꜱᴇ ᴀ ᴘʟᴀᴄᴇʀ ᴏʀ ᴀ ʜᴇᴀᴅ ꜰʀᴏᴍ /heads."
   display: chat
+hider-not-yours:
+  text: "<#C27B6B>ʜᴇᴀᴅ #<number> ᴡᴀꜱ ᴘʟᴀᴄᴇᴅ ʙʏ <placed_by>: ʏᴏᴜ ᴄᴀɴ ᴏɴʟʏ ʀᴇᴍᴏᴠᴇ ʏᴏᴜʀ ᴏᴡɴ"
+  display: action_bar
+hider-head-info:
+  text: "<#f2ebd7>ʜᴇᴀᴅ <#B8E6D5>#<number> <#6C757D>· ᴘʟᴀᴄᴇᴅ ʙʏ <#DDB67D><placed_by>"
+  display: action_bar
+hider-placers-only:
+  text: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ʜɪᴅᴇʀꜱ <#C27B6B>ᴘʟᴀᴄᴇ ᴡɪᴛʜ ᴘʟᴀᴄᴇʀꜱ ᴏɴʟʏ<#f2ebd7>: /headhunt head <hunt_id>"
+  display: chat
 editor-label: "<#FCD472>#<number>"
 editor-label-clue: "<#B8E6D5>ᴄʟᴜᴇ"
 editor-label-conflict: "<#C27B6B>ʙʟᴏᴄᴋᴇᴅ"
@@ -221,6 +230,7 @@ gui:
     - "<#6C757D>ᴀᴛ: <#f2ebd7><world> <x>, <y>, <z>"
     - "<#6C757D>ᴄʟᴜᴇ: <#f2ebd7><clue>"
     - "<#6C757D>ꜰᴏᴜɴᴅ ʙʏ: <#f2ebd7><finds>"
+    - "<#6C757D>ᴘʟᴀᴄᴇᴅ ʙʏ: <#f2ebd7><placed_by>"
     - ""
     - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴛᴇʟᴇᴘᴏʀᴛ]"
     - "<#FCD472>[ʀɪɢʜᴛ-ᴄʟɪᴄᴋ ꜰᴏʀ ᴏᴘᴛɪᴏɴꜱ]"
@@ -228,6 +238,7 @@ gui:
   head-icon-conflict-lore:
     - "<#C27B6B>ʙʟᴏᴄᴋᴇᴅ: ꜱᴏᴍᴇᴛʜɪɴɢ ᴏᴄᴄᴜᴘɪᴇꜱ ᴛʜɪꜱ ꜱᴘᴏᴛ"
     - "<#6C757D>ᴀᴛ: <#f2ebd7><world> <x>, <y>, <z>"
+    - "<#6C757D>ᴘʟᴀᴄᴇᴅ ʙʏ: <#f2ebd7><placed_by>"
     - "<#6C757D>ᴄʟᴜᴇ: <#f2ebd7><clue>"
     - ""
     - "<#FCD472>[ᴄʟɪᴄᴋ ᴛᴏ ᴛᴇʟᴇᴘᴏʀᴛ]"
@@ -523,6 +534,7 @@ commands:
   top-you: "<#6C757D> ʏᴏᴜ ᴀʀᴇ <#f2ebd7>#<rank>"
   top-empty: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ɴᴏʙᴏᴅʏ ʜᴀꜱ ꜰᴏᴜɴᴅ ᴀ ʜᴇᴀᴅ ɪɴ <hunt> <#f2ebd7>ʏᴇᴛ."
   edit-on: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴇᴅɪᴛ ᴍᴏᴅᴇ <#8FAA87>ᴏɴ<#f2ebd7> ꜰᴏʀ <hunt><#f2ebd7>. ᴘʟᴀᴄᴇ ʜᴇᴀᴅꜱ, ꜱɴᴇᴀᴋ + ʟᴇꜰᴛ-ᴄʟɪᴄᴋ ᴛᴏ ʀᴇᴍᴏᴠᴇ, ʀɪɢʜᴛ-ᴄʟɪᴄᴋ ꜰᴏʀ ᴏᴘᴛɪᴏɴꜱ. ᴏɴʟʏ ʏᴏᴜ ꜱᴇᴇ ᴛʜᴇ ᴘʀᴇᴠɪᴇᴡꜱ."
+  edit-on-hider: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ʜɪᴅɪɴɢ ʜᴇᴀᴅꜱ ꜰᴏʀ <hunt><#f2ebd7>. ʏᴏᴜ ꜱᴇᴇ ᴇᴠᴇʀʏ ʜᴇᴀᴅ; ᴘʟᴀᴄᴇ ᴡɪᴛʜ /headhunt head <hunt_id>, ꜱɴᴇᴀᴋ + ʟᴇꜰᴛ-ᴄʟɪᴄᴋ ʀᴇᴍᴏᴠᴇꜱ ʏᴏᴜʀ ᴏᴡɴ."
   edit-off: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴇᴅɪᴛ ᴍᴏᴅᴇ <#C27B6B>ᴏꜰꜰ<#f2ebd7> ꜰᴏʀ <hunt><#f2ebd7>."
   edit-usage: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴜꜱᴇ /headhunt edit <hunt> ᴛᴏ ꜱᴛᴀʀᴛ ᴇᴅɪᴛɪɴɢ."
   placer-given: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ʜᴇʀᴇ'ꜱ ᴀ ᴘʟᴀᴄᴇʀ ꜰᴏʀ <hunt><#f2ebd7>."

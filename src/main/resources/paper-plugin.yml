@@ -39,6 +39,7 @@ permissions:
     children:
       oakhunt.use: true
       oakhunt.edit: true
+      oakhunt.place: true
       oakhunt.manage: true
       oakhunt.player: true
       oakhunt.rewards.commands: true
@@ -49,6 +50,9 @@ permissions:
     default: true
   oakhunt.edit:
     description: 'Create hunts, edit mode, placers, skins, clues and the start check'
+    default: op
+  oakhunt.place:
+    description: 'Hider: edit mode and placers for hiding heads; sees every head, removes only their own'
     default: op
   oakhunt.manage:
     description: 'Start, end and schedule hunts; item and key rewards; hunt settings'

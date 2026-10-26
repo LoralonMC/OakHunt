@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-10-26
+
+### Added
+
+- `oakhunt.place` hider permission: edit mode and placers without the rest of `oakhunt.edit`. Hiders see every head in the hunt, place with placers only, and remove or undo only heads they placed; right-clicking a head shows its number and who placed it
+- Heads list and head menu show who placed each head
+
 ## [1.1.0] - 2026-10-26
 
 ### Changed

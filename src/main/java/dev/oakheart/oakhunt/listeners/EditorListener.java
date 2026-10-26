@@ -44,6 +44,11 @@ public class EditorListener implements Listener {
         Material type = block.getType();
         if (editing == null || (type != Material.PLAYER_HEAD && type != Material.PLAYER_WALL_HEAD)) return;
         event.setCancelled(true);
+        if (placerHunt == null && plugin.getEditorService().isHider(player)) {
+            // Any other head would add its skin to the set, which hiders can't change.
+            plugin.getMessages().send(player, "hider-placers-only", Messages.huntId(editing));
+            return;
+        }
 
         Head occupant = plugin.getHuntManager().headAt(block);
         if (occupant != null) {

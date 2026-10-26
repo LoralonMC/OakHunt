@@ -8,6 +8,7 @@ Head hunts run entirely in-game: built in edit mode, hidden until they start, an
 - Restart any hunt later in the same spots, as a fresh run or continuing the last one
 - Start check: blocked spots are skipped, leave the total, and are reported with teleport, remove and force-place buttons
 - Edit mode with previews only the editor sees, numbered labels, sneak + left-click removal and undo
+- Hider role: helpers can hide heads and see the others, but only change their own
 - Skin sets per hunt (held head, HeadDatabase id, player name or UUID, texture), with fixed or random placers that are never used up
 - Scheduled starts and ends in UTC or relative time (`+2h`), caught up on boot
 - Milestone rewards edited in a GUI: ExecutableItems and Nexo items by id, crate keys, held vanilla items, console commands
@@ -39,13 +40,13 @@ Head hunts run entirely in-game: built in edit mode, hidden until they start, an
 | `/headhunt list` | List hunts | `oakhunt.edit` |
 | `/headhunt menu [hunt]` | Admin GUI | `oakhunt.edit` |
 | `/headhunt create <id>` | Create a hunt | `oakhunt.edit` |
-| `/headhunt edit [hunt]` | Toggle edit mode | `oakhunt.edit` |
-| `/headhunt head <hunt> [skin\|random]` | Get a placer | `oakhunt.edit` |
+| `/headhunt edit [hunt]` | Toggle edit mode | `oakhunt.edit` or `oakhunt.place` |
+| `/headhunt head <hunt> [skin\|random]` | Get a placer | `oakhunt.edit` or `oakhunt.place` |
 | `/headhunt skin <hunt> add [source]` / `remove <id>` / `list` | Manage the skin set | `oakhunt.edit` |
 | `/headhunt clue <text\|clear>` | Set the clue of the head you look at | `oakhunt.edit` |
 | `/headhunt check <hunt>` | Start check without starting | `oakhunt.edit` |
 | `/headhunt conflicts <hunt>` | List blocked heads | `oakhunt.edit` |
-| `/headhunt undo` | Undo your last edit-mode change | `oakhunt.edit` |
+| `/headhunt undo` | Undo your last edit-mode change | `oakhunt.edit` or `oakhunt.place` |
 | `/headhunt start <hunt> [new\|continue] [date]` | Start now or schedule | `oakhunt.manage` |
 | `/headhunt end <hunt> [date]` | End now or schedule | `oakhunt.manage` |
 | `/headhunt cancel <hunt>` | Cancel a scheduled start or end | `oakhunt.manage` |
@@ -60,6 +61,7 @@ Head hunts run entirely in-game: built in edit mode, hidden until they start, an
 |------------|-------------|---------|
 | `oakhunt.use` | Find heads, journal, leaderboards | Everyone |
 | `oakhunt.edit` | Create hunts, edit mode, placers, skins, clues, start check | OP |
+| `oakhunt.place` | Hider: edit mode and placers only; sees every head, removes only their own | OP |
 | `oakhunt.manage` | Start, end, schedule; item and key rewards; hunt settings | OP |
 | `oakhunt.player` | View, reset or grant a player's progress | OP |
 | `oakhunt.rewards.commands` | Add or change console-command rewards | OP |

@@ -58,6 +58,8 @@ public class EditorService {
 
     private static final class Session {
         private final String huntId;
+        /** A hider (oakhunt.place without oakhunt.edit): sees every head, changes only their own. */
+        private final boolean hider;
         private String world;
         private final Map<Integer, TextDisplay> labels = new HashMap<>();
         private final Map<Integer, String> labelTexts = new HashMap<>();
@@ -65,8 +67,9 @@ public class EditorService {
         private final Deque<Undo> undo = new ArrayDeque<>();
         private long lastNearbyResend;
 
-        private Session(String huntId) {
+        private Session(String huntId, boolean hider) {
             this.huntId = huntId;
+            this.hider = hider;
         }
     }
 
@@ -92,7 +95,7 @@ public class EditorService {
 
     public void enter(Player player, Hunt hunt) {
         exit(player);
-        Session session = new Session(hunt.getId());
+        Session session = new Session(hunt.getId(), !player.hasPermission("oakhunt.edit"));
         sessions.put(player.getUniqueId(), session);
         render(player, session);
     }
@@ -114,6 +117,12 @@ public class EditorService {
     public Optional<Hunt> editing(Player player) {
         Session session = sessions.get(player.getUniqueId());
         return session == null ? Optional.empty() : plugin.getHuntManager().hunt(session.huntId);
+    }
+
+    /** Whether the player's session is a hider session (place and remove their own heads only). */
+    public boolean isHider(Player player) {
+        Session session = sessions.get(player.getUniqueId());
+        return session != null && session.hider;
     }
 
     public boolean isEditing(Player player, String huntId) {

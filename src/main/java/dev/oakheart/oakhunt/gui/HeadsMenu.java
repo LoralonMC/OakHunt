@@ -88,6 +88,7 @@ public class HeadsMenu extends Menu {
                 Messages.text("number", head.getNumber()), Messages.text("world", head.getWorld()),
                 Messages.text("x", head.getX()), Messages.text("y", head.getY()), Messages.text("z", head.getZ()),
                 Messages.text("clue", head.getClue() == null ? "-" : head.getClue()),
-                Messages.text("finds", finds)};
+                Messages.text("finds", finds),
+                Messages.text("placed_by", head.getCreatedBy() == null ? "-" : head.getCreatedBy())};
     }
 }
