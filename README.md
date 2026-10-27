@@ -12,7 +12,8 @@ Head hunts run entirely in-game: built in edit mode, hidden until they start, an
 - Hider role: helpers can hide heads and see the others, but only change their own
 - Skin sets per hunt (held head, HeadDatabase id, player name or UUID, texture), with fixed or random placers that are never used up
 - Scheduled starts and ends in UTC or relative time (`+2h`), caught up on boot
-- Milestone rewards edited in a GUI: ExecutableItems and Nexo items by id, crate keys, held vanilla items, console commands
+- Milestone rewards edited in a GUI: ExecutableItems and Nexo items by id, crate keys, OakTags chat tags (granted directly or as a voucher), held vanilla items, console commands
+- Edit files: export a hunt's name, description, settings, milestones, rewards and clues to YAML, edit it outside the game, and apply it back after a preview
 - Reward items that don't fit go to OakOverflow
 - Player journal: progress, rank, next reward, unlockable clues, past hunts
 - Per-player feedback only (sounds, particles, found-head particles); no public markers that give spots away
@@ -24,7 +25,7 @@ Head hunts run entirely in-game: built in edit mode, hidden until they start, an
 - Paper 26.3
 - Java 25
 - PacketEvents
-- Optional: PlaceholderAPI, HeadDatabase, ExecutableItems + SCore, Nexo, OakOverflow, CoreProtect, PhoenixCrates (crate key rewards)
+- Optional: PlaceholderAPI, HeadDatabase, ExecutableItems + SCore, Nexo, OakOverflow, CoreProtect, PhoenixCrates (crate key rewards), OakTags (chat tag rewards)
 
 ## Installation
 
@@ -54,6 +55,8 @@ Head hunts run entirely in-game: built in edit mode, hidden until they start, an
 | `/headhunt player <player> <hunt> info\|reset\|grant <n\|all> [pay]` | Support tools (`pay` also needs `oakhunt.rewards.pay`) | `oakhunt.player` |
 | `/headhunt delete <hunt>` | Archive a hunt | `oakhunt.admin` |
 | `/headhunt import <file>` | Import a past hunt from `plugins/OakHunt/import/` | `oakhunt.admin` |
+| `/headhunt export <hunt> [overwrite]` | Write the hunt's edit file to `plugins/OakHunt/edits/<hunt>.yml` | `oakhunt.manage` |
+| `/headhunt apply <hunt>` | Preview the edit file's changes, with [Confirm] to apply them | `oakhunt.manage` |
 | `/headhunt reload` | Reload config and messages | `oakhunt.admin` |
 
 ## Permissions
@@ -63,7 +66,7 @@ Head hunts run entirely in-game: built in edit mode, hidden until they start, an
 | `oakhunt.use` | Find heads, journal, leaderboards | Everyone |
 | `oakhunt.edit` | Create hunts, edit mode, placers, skins, clues, start check | OP |
 | `oakhunt.place` | Hider: edit mode and placers only; sees every head, removes only their own | OP |
-| `oakhunt.manage` | Start, end, schedule; item and key rewards; hunt settings | OP |
+| `oakhunt.manage` | Start, end, schedule; item, key and tag rewards; hunt settings; export and apply edit files | OP |
 | `oakhunt.player` | View, reset or grant a player's progress | OP |
 | `oakhunt.rewards.commands` | Add or change console-command rewards | OP |
 | `oakhunt.rewards.pay` | Test payouts and `grant ... pay` (rewards without a real find) | OP |
@@ -73,6 +76,16 @@ Head hunts run entirely in-game: built in edit mode, hidden until they start, an
 ## Configuration
 
 Hunts, heads, rewards and progress live in `oakhunt.db` and are managed in-game. `config.yml` holds server-wide defaults: which blocks a head may replace at start, find sounds and particles, found-head particles, hint distance and frequency, editor preview radius, and integration toggles. All text is in `messages.yml`.
+
+### Edit files
+
+`/headhunt export <hunt>` writes the hunt's editable parts to `plugins/OakHunt/edits/<hunt>.yml`: display name, description, settings, milestones (message, broadcast, rewards) and clues. Heads, skins, schedules, runs and progress are not in the file and apply never changes them. The database stays the source of truth:
+
+- The file carries a fingerprint of the hunt. `/headhunt apply` refuses if the hunt changed in-game since the export, so a stale file can't overwrite GUI edits.
+- Apply lists every change first. [Confirm] carries a hash of the previewed file, so a file edited after the preview is refused rather than applied unseen.
+- After applying, the file is rewritten with a fresh fingerprint, ready for the next edit.
+- Export won't replace a file with unapplied edits unless you add `overwrite`.
+- Every change is audited under the person who confirmed it. Command rewards in a file need no extra permission: whoever can write files on the server can already run anything.
 
 ## Placeholders
 

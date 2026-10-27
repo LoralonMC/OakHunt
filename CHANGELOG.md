@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.0] - 2026-10-27
+
+### Added
+
+- Chat tag rewards (needs OakTags): pick a grantable tag in the new Chat Tag reward type. Left-click grants it directly (nothing to lose or trade; a player who already owns it gets nothing), right-click gives a voucher, which is tradeable and goes to OakOverflow when the inventory is full
+- Edit files: `/headhunt export <hunt>` writes the hunt's name, description, settings, milestones (messages, broadcasts, rewards) and clues to `plugins/OakHunt/edits/<hunt>.yml`; `/headhunt apply <hunt>` previews the changes and applies them on [Confirm]. Apply refuses if the hunt changed in-game since the export, or if the file changed since the preview. Needs `oakhunt.manage`
+
 ## [1.5.1] - 2026-10-27
 
 ### Changed

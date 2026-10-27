@@ -182,7 +182,21 @@ public class HeadHuntCommand {
                                 .executes(ctx -> {
                                     plugin.getImportService().run(ctx.getSource().getSender(), StringArgumentType.getString(ctx, "file"));
                                     return Command.SINGLE_SUCCESS;
-                                })));
+                                })))
+                .then(Commands.literal("export")
+                        .requires(perm("oakhunt.manage"))
+                        .then(huntArg()
+                                .executes(ctx -> hunt(ctx, (sender, hunt) -> plugin.getHuntFileService().export(sender, hunt, false)))
+                                .then(Commands.literal("overwrite")
+                                        .executes(ctx -> hunt(ctx, (sender, hunt) -> plugin.getHuntFileService().export(sender, hunt, true))))))
+                .then(Commands.literal("apply")
+                        .requires(perm("oakhunt.manage"))
+                        .then(huntArg()
+                                .executes(ctx -> hunt(ctx, (sender, hunt) -> plugin.getHuntFileService().apply(sender, hunt, null)))
+                                .then(Commands.literal("confirm")
+                                        .then(Commands.argument("hash", StringArgumentType.word())
+                                                .executes(ctx -> hunt(ctx, (sender, hunt) -> plugin.getHuntFileService()
+                                                        .apply(sender, hunt, StringArgumentType.getString(ctx, "hash"))))))));
     }
 
     // ---------------------------------------------------------------- tree helpers

@@ -15,6 +15,7 @@ import dev.oakheart.oakhunt.hook.ExecutableItemsHook;
 import dev.oakheart.oakhunt.hook.HeadDatabaseHook;
 import dev.oakheart.oakhunt.hook.NexoHook;
 import dev.oakheart.oakhunt.hook.OakHuntExpansion;
+import dev.oakheart.oakhunt.hook.OakTagsHook;
 import dev.oakheart.oakhunt.hook.OverflowHook;
 import dev.oakheart.oakhunt.listeners.EditorListener;
 import dev.oakheart.oakhunt.listeners.HeadListener;
@@ -25,6 +26,7 @@ import dev.oakheart.oakhunt.model.Hunt;
 import dev.oakheart.oakhunt.service.EditorActions;
 import dev.oakheart.oakhunt.service.EditorService;
 import dev.oakheart.oakhunt.service.FeedbackService;
+import dev.oakheart.oakhunt.service.HuntFileService;
 import dev.oakheart.oakhunt.service.HuntManager;
 import dev.oakheart.oakhunt.service.ImportService;
 import dev.oakheart.oakhunt.service.ProgressService;
@@ -57,6 +59,7 @@ public final class OakHunt extends JavaPlugin {
     private EditorActions editorActions;
     private SkinService skinService;
     private ImportService importService;
+    private HuntFileService huntFileService;
 
     private Menus menus;
     private ChatPrompt chatPrompt;
@@ -65,6 +68,7 @@ public final class OakHunt extends JavaPlugin {
     private OverflowHook overflowHook;
     private ExecutableItemsHook executableItemsHook;
     private NexoHook nexoHook;
+    private OakTagsHook oakTagsHook;
     private HeadDatabaseHook headDatabaseHook;
     private CoreProtectHook coreProtectHook;
     private PacketListenerCommon packetListener;
@@ -115,6 +119,8 @@ public final class OakHunt extends JavaPlugin {
         executableItemsHook.initialize();
         nexoHook = new NexoHook(getLogger());
         nexoHook.initialize();
+        oakTagsHook = new OakTagsHook(getLogger());
+        oakTagsHook.initialize();
         headDatabaseHook = new HeadDatabaseHook(getLogger());
         headDatabaseHook.initialize();
         coreProtectHook = new CoreProtectHook(getLogger());
@@ -132,6 +138,7 @@ public final class OakHunt extends JavaPlugin {
         editorActions = new EditorActions(this);
         skinService = new SkinService(this);
         importService = new ImportService(this);
+        huntFileService = new HuntFileService(this);
         menus = new Menus(this);
         chatPrompt = new ChatPrompt(this);
         huntActions = new HuntActions(this);
@@ -197,12 +204,14 @@ public final class OakHunt extends JavaPlugin {
     public EditorActions getEditorActions() { return editorActions; }
     public SkinService getSkinService() { return skinService; }
     public ImportService getImportService() { return importService; }
+    public HuntFileService getHuntFileService() { return huntFileService; }
     public Menus getMenus() { return menus; }
     public ChatPrompt getChatPrompt() { return chatPrompt; }
     public HuntActions getHuntActions() { return huntActions; }
     public OverflowHook getOverflowHook() { return overflowHook; }
     public ExecutableItemsHook getExecutableItemsHook() { return executableItemsHook; }
     public NexoHook getNexoHook() { return nexoHook; }
+    public OakTagsHook getOakTagsHook() { return oakTagsHook; }
     public HeadDatabaseHook getHeadDatabaseHook() { return headDatabaseHook; }
     public CoreProtectHook getCoreProtectHook() { return coreProtectHook; }
 }

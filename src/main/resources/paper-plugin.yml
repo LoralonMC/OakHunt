@@ -29,6 +29,9 @@ dependencies:
     OakOverflow:
       load: BEFORE
       required: false
+    OakTags:
+      load: BEFORE
+      required: false
     CoreProtect:
       load: BEFORE
       required: false
@@ -55,7 +58,7 @@ permissions:
     description: 'Hider: edit mode and placers for hiding heads; sees every head, removes only their own'
     default: op
   oakhunt.manage:
-    description: 'Start, end and schedule hunts; item and key rewards; hunt settings'
+    description: 'Start, end and schedule hunts; item, key and tag rewards; hunt settings; export and apply edit files'
     default: op
   oakhunt.player:
     description: 'View, reset or grant a player''s hunt progress'

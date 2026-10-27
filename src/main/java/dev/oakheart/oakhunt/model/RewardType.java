@@ -10,5 +10,9 @@ public enum RewardType {
     /** A vanilla item stored as a copy. */
     ITEM,
     /** A console command; {player} is the player's name. */
-    COMMAND
+    COMMAND,
+    /** OakTags chat tag, granted straight to the player. */
+    TAG,
+    /** OakTags chat tag voucher, built fresh from the tag id at payout. */
+    TAG_VOUCHER
 }

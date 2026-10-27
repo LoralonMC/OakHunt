@@ -29,6 +29,13 @@ public class RewardTypeMenu extends Menu {
         set(10, button(Material.ENCHANTED_BOOK, "type-executable"), e -> askItem(RewardType.EXECUTABLE_ITEM));
         set(11, button(Material.AMETHYST_SHARD, "type-nexo"), e -> askItem(RewardType.NEXO_ITEM));
         set(12, button(Material.TRIPWIRE_HOOK, "type-key"), e -> plugin.getMenus().openKeyPicker(viewer, hunt, milestone));
+        set(13, button(Material.NAME_TAG, "type-tag"), e -> {
+            if (!plugin.getOakTagsHook().isAvailable()) {
+                plugin.getMessages().cmd(viewer, "integration-missing", Messages.text("plugin", "OakTags"));
+                return;
+            }
+            plugin.getMenus().openTagPicker(viewer, hunt, milestone, 0);
+        });
         set(14, button(Material.CHEST, "type-held"), e -> addHeld());
         set(16, button(Material.COMMAND_BLOCK, "type-command"), e -> {
             if (!viewer.hasPermission("oakhunt.rewards.commands")) {

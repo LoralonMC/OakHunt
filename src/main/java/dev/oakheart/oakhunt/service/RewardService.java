@@ -116,7 +116,21 @@ public class RewardService {
             case ITEM -> give(player, hunt, reward, reward.item() == null ? null : ItemStack.deserializeBytes(reward.item()));
             case CRATE_KEY -> dispatch("phoenixcrates giveKey " + reward.value() + " " + player.getName() + " " + reward.amount());
             case COMMAND -> dispatch(reward.value().replace("{player}", player.getName()));
+            case TAG -> grantTag(player, hunt, reward);
+            case TAG_VOUCHER -> give(player, hunt, reward, plugin.getOakTagsHook().voucher(reward.value(), reward.amount()));
         }
+    }
+
+    /** A tag the player already owns is skipped quietly: there is nothing to give. */
+    private void grantTag(Player player, Hunt hunt, Reward reward) {
+        if (!plugin.getOakTagsHook().isGrantable(reward.value())) {
+            plugin.getLogger().severe("Hunt " + hunt.getId() + " tag reward '" + reward.value()
+                    + "' is not a grantable OakTags tag, so " + player.getName() + " did not receive it");
+            plugin.getDatabase().audit(player.getName(), hunt.getId(), "reward-failed", reward.type() + " " + reward.value());
+            plugin.getMessages().send(player, "reward-failed");
+            return;
+        }
+        plugin.getOakTagsHook().grant(player, reward.value());
     }
 
     private void give(Player player, Hunt hunt, Reward reward, ItemStack item) {
@@ -174,6 +188,8 @@ public class RewardService {
             }
             case CRATE_KEY, EXECUTABLE_ITEM, NEXO_ITEM -> reward.amount() + "x " + reward.value();
             case COMMAND -> reward.value();
+            case TAG -> reward.value() + " (granted)";
+            case TAG_VOUCHER -> reward.amount() + "x " + reward.value() + " voucher";
         };
     }
 }

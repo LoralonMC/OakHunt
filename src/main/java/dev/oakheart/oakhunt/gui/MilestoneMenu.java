@@ -99,6 +99,8 @@ public class MilestoneMenu extends Menu {
             case NEXO_ITEM -> new ItemStack(Material.AMETHYST_SHARD);
             case CRATE_KEY -> new ItemStack(Material.TRIPWIRE_HOOK);
             case COMMAND -> new ItemStack(Material.COMMAND_BLOCK);
+            case TAG -> new ItemStack(Material.NAME_TAG);
+            case TAG_VOUCHER -> new ItemStack(Material.PAPER);
         };
     }
 }

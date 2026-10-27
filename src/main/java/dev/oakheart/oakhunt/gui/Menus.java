@@ -53,6 +53,10 @@ public class Menus {
         new KeyPickerMenu(plugin, player, hunt, milestone).open();
     }
 
+    public void openTagPicker(Player player, Hunt hunt, Milestone milestone, int page) {
+        new TagPickerMenu(plugin, player, hunt, milestone, page).open();
+    }
+
     public void openSettings(Player player, Hunt hunt) {
         new SettingsMenu(plugin, player, hunt).open();
     }
