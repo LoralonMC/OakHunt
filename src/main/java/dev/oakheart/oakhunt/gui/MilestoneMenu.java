@@ -52,7 +52,7 @@ public class MilestoneMenu extends Menu {
         set(20, button(Material.EMERALD, "add-reward"), e -> plugin.getMenus().openRewardType(viewer, hunt, milestone));
         set(22, button(Material.OAK_SIGN, "milestone-message",
                 Messages.text("message", milestone.getMessage() == null ? "default" : milestone.getMessage())), e ->
-                plugin.getChatPrompt().ask(viewer, "prompt-milestone-message", input -> {
+                plugin.getChatPrompt().ask(viewer, "prompt-milestone-message", milestone.getMessage(), input -> {
                     if (input != null) {
                         milestone.setMessage(input.equalsIgnoreCase("default") ? null : input);
                         plugin.getHuntManager().saveMilestone(milestone, viewer.getName());
@@ -69,7 +69,7 @@ public class MilestoneMenu extends Menu {
                 redraw();
                 return;
             }
-            plugin.getChatPrompt().ask(viewer, "prompt-broadcast", input -> {
+            plugin.getChatPrompt().ask(viewer, "prompt-broadcast", milestone.getBroadcast(), input -> {
                 if (input != null) {
                     milestone.setBroadcast(input.equalsIgnoreCase("default")
                             ? plugin.getMessages().manager().getMessageText("default-broadcast") : input);

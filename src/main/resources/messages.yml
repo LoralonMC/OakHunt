@@ -615,7 +615,10 @@ commands:
   import-missing: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ɴᴏ ɪᴍᴘᴏʀᴛ ꜰɪʟᴇ <#C27B6B>ɴᴀᴍᴇᴅ<#f2ebd7> <#FCD472><file><#f2ebd7> ɪɴ plugins/OakHunt/import."
   import-failed: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ɪᴍᴘᴏʀᴛ <#C27B6B>ꜰᴀɪʟᴇᴅ<#f2ebd7>: <reason>"
   import-done: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ɪᴍᴘᴏʀᴛᴇᴅ <hunt><#f2ebd7>: <#B8E6D5><heads> <#f2ebd7>ʜᴇᴀᴅꜱ, <#B8E6D5><results> <#f2ebd7>ᴘʟᴀʏᴇʀ ʀᴇꜱᴜʟᴛꜱ."
-  prompt-cancel-hint: "<#6C757D>ᴛʏᴘᴇ cancel ᴛᴏ ꜱᴛᴏᴘ."
+  # <paste> only shows when the value being edited already has text; it fills your chat box with it
+  prompt-actions: "<paste><cancel> <#6C757D>ᴏʀ ᴛʏᴘᴇ cancel."
+  prompt-paste: "<#FCD472>[ᴘᴀꜱᴛᴇ ᴄᴜʀʀᴇɴᴛ] "
+  prompt-cancel: "<#FCD472>[ᴄᴀɴᴄᴇʟ]"
   prompt-hunt-id: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴛʏᴘᴇ ᴛʜᴇ ɴᴇᴡ ʜᴜɴᴛ'ꜱ ɪᴅ ɪɴ ᴄʜᴀᴛ, ᴇ.ɢ. halloween."
   prompt-date: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴛʏᴘᴇ ᴀ ᴛɪᴍᴇ ɪɴ ᴜᴛᴄ, ᴇ.ɢ. 2026-10-31 18:00, ᴏʀ +2h."
   prompt-rename: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴛʏᴘᴇ ᴛʜᴇ ᴅɪꜱᴘʟᴀʏ ɴᴀᴍᴇ. ᴄᴏʟᴏᴜʀꜱ ᴡᴏʀᴋ, ᴇ.ɢ. \\<#B5835A>Acorn Hunt."

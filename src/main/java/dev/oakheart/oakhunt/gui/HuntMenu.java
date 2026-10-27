@@ -97,7 +97,8 @@ public class HuntMenu extends Menu {
                 Messages.text("description", hunt.getDescription() == null ? "-" : hunt.getDescription())), e -> {
             if (!require("oakhunt.edit")) return;
             boolean description = e.isRightClick();
-            plugin.getChatPrompt().ask(viewer, description ? "prompt-description" : "prompt-rename", input -> {
+            plugin.getChatPrompt().ask(viewer, description ? "prompt-description" : "prompt-rename",
+                    description ? hunt.getDescription() : hunt.getDisplayName(), input -> {
                 if (input != null) {
                     if (description) {
                         hunt.setDescription(input.equalsIgnoreCase("clear") ? null : input);

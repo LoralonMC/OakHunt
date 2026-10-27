@@ -54,7 +54,7 @@ public class HeadMenu extends Menu {
             redraw();
         });
         set(13, button(Material.WRITABLE_BOOK, "head-clue", Messages.text("clue", head.getClue() == null ? "-" : head.getClue())),
-                e -> plugin.getChatPrompt().ask(viewer, "prompt-clue", input -> {
+                e -> plugin.getChatPrompt().ask(viewer, "prompt-clue", head.getClue(), input -> {
                     if (input != null) {
                         plugin.getHuntManager().setClue(head, input.equalsIgnoreCase("clear") ? null : input, viewer.getName());
                         plugin.getMessages().cmd(viewer, "clue-set", Messages.text("number", head.getNumber()));

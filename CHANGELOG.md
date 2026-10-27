@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-10-27
+
+### Added
+
+- Chat prompts have a clickable [Cancel], and prompts that edit existing text (milestone message and broadcast, hunt name and description, clues) have [Paste current], which puts the current text in the chat box to edit. Hovering it shows the text. [Cancel] runs the new `/headhunt cancelprompt`
+
 ## [1.4.0] - 2026-10-27
 
 ### Added
