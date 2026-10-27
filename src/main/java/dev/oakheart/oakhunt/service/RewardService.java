@@ -6,6 +6,7 @@ import dev.oakheart.oakhunt.model.Milestone;
 import dev.oakheart.oakhunt.model.Reward;
 import dev.oakheart.oakhunt.model.Run;
 import dev.oakheart.oakhunt.util.Messages;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -47,22 +48,64 @@ public class RewardService {
         }
     }
 
-    /** Delivers a milestone's rewards and messages. Also used for the GUI's unrecorded test payout. */
+    /** Delivers a milestone's rewards and messages. */
     public void pay(Player player, Hunt hunt, Milestone milestone, int found, int total) {
+        pay(player, hunt, milestone, found, total, false);
+    }
+
+    /**
+     * @param test the GUI's unrecorded test payout: the broadcast goes to the tester only
+     */
+    public void pay(Player player, Hunt hunt, Milestone milestone, int found, int total, boolean test) {
         for (Reward reward : milestone.getRewards()) {
             deliver(player, hunt, reward);
         }
-        TagResolver[] resolvers = {Messages.hunt(hunt), Messages.text("player", player.getName()),
+        TagResolver[] resolvers = resolvers(player, hunt, milestone, found, total);
+        sendMessage(player, milestone, resolvers);
+        Component broadcast = broadcast(milestone, resolvers);
+        if (broadcast != null) {
+            if (test) player.sendMessage(broadcast);
+            else Bukkit.broadcast(broadcast);
+        }
+        plugin.getFeedbackService().milestone(player);
+    }
+
+    /**
+     * Shows a milestone's message and broadcast to the viewer only, filled in as if they had just
+     * reached it. Pays nothing.
+     */
+    public void preview(Player viewer, Hunt hunt, Milestone milestone) {
+        int total = plugin.getHuntManager().liveTotal(hunt);
+        int found = milestone.isAll() ? total : milestone.getThreshold();
+        TagResolver[] resolvers = resolvers(viewer, hunt, milestone, found, total);
+        plugin.getMessages().cmd(viewer, "preview-header", resolvers);
+        sendMessage(viewer, milestone, resolvers);
+        Component broadcast = broadcast(milestone, resolvers);
+        if (broadcast != null) {
+            plugin.getMessages().cmd(viewer, "preview-broadcast");
+            viewer.sendMessage(broadcast);
+        } else {
+            plugin.getMessages().cmd(viewer, "preview-no-broadcast");
+        }
+        plugin.getFeedbackService().milestone(viewer);
+    }
+
+    private TagResolver[] resolvers(Player player, Hunt hunt, Milestone milestone, int found, int total) {
+        return new TagResolver[]{Messages.hunt(hunt), Messages.text("player", player.getName()),
                 Messages.text("found", found), Messages.text("total", total), Messages.text("milestone", label(milestone))};
+    }
+
+    private void sendMessage(Player player, Milestone milestone, TagResolver[] resolvers) {
         if (milestone.getMessage() != null && !milestone.getMessage().isBlank()) {
             player.sendMessage(plugin.getMessages().raw(milestone.getMessage(), resolvers));
         } else {
             plugin.getMessages().send(player, milestone.isAll() ? "milestone-complete" : "milestone-reached", resolvers);
         }
-        if (milestone.getBroadcast() != null && !milestone.getBroadcast().isBlank()) {
-            Bukkit.broadcast(plugin.getMessages().raw(milestone.getBroadcast(), resolvers));
-        }
-        plugin.getFeedbackService().milestone(player);
+    }
+
+    private Component broadcast(Milestone milestone, TagResolver[] resolvers) {
+        if (milestone.getBroadcast() == null || milestone.getBroadcast().isBlank()) return null;
+        return plugin.getMessages().raw(milestone.getBroadcast(), resolvers);
     }
 
     public void deliver(Player player, Hunt hunt, Reward reward) {

@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * A hunt's milestones. Click to edit, shift-left to test-pay to yourself (not recorded),
- * shift-right to remove.
+ * A hunt's milestones. Click to edit, right-click to preview its messages, shift-left to test-pay
+ * to yourself (not recorded), shift-right to remove.
  */
 public class RewardsMenu extends Menu {
 
@@ -40,8 +40,10 @@ public class RewardsMenu extends Menu {
                     }
                     int total = plugin.getHuntManager().liveTotal(hunt);
                     plugin.getRewardService().pay(viewer, hunt, milestone,
-                            milestone.isAll() ? total : milestone.getThreshold(), total);
+                            milestone.isAll() ? total : milestone.getThreshold(), total, true);
                     plugin.getMessages().cmd(viewer, "test-paid", Messages.text("milestone", plugin.getRewardService().label(milestone)));
+                } else if (e.isRightClick() && !e.isShiftClick()) {
+                    plugin.getRewardService().preview(viewer, hunt, milestone);
                 } else if (e.isShiftClick()) {
                     plugin.getMenus().choose(viewer, "confirm-remove-milestone", () -> {
                         plugin.getHuntManager().removeMilestone(milestone, viewer.getName());
@@ -53,6 +55,13 @@ public class RewardsMenu extends Menu {
             });
         }
         back(27, () -> plugin.getMenus().openHunt(viewer, hunt));
+        if (!milestones.isEmpty()) {
+            set(35, button(Material.SPYGLASS, "preview-all"), e -> {
+                for (Milestone milestone : plugin.getHuntManager().milestones(hunt)) {
+                    plugin.getRewardService().preview(viewer, hunt, milestone);
+                }
+            });
+        }
         set(31, button(Material.EMERALD, "add-milestone"), e -> plugin.getChatPrompt().ask(viewer, "prompt-milestone", input -> {
             if (input != null) {
                 int threshold;
@@ -85,6 +94,8 @@ public class RewardsMenu extends Menu {
         if (milestone.getRewards().isEmpty()) lore.add(plugin.getMessages().line("gui.no-rewards"));
         lore.addAll(plugin.getMessages().lines("gui.milestone-icon-lore",
                 Messages.text("broadcast", milestone.getBroadcast() == null ? "off" : "on")));
+        // Its own key so existing messages.yml files pick it up (defaults only add missing keys).
+        lore.add(plugin.getMessages().line("gui.milestone-icon-preview"));
         String nameKey = milestone.isAll() ? "gui.milestone-all-name" : "gui.milestone-name";
         return ItemBuilder.of(milestone.isAll() ? Material.NETHER_STAR : Material.EXPERIENCE_BOTTLE)
                 .name(plugin.getMessages().line(nameKey, Messages.text("count", milestone.getThreshold())))

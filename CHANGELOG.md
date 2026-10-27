@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-10-27
+
+### Added
+
+- Message previews: a Preview Messages button in each milestone, right-click on a milestone in the rewards list, and Preview All Messages for the whole hunt. Each shows the milestone's message and broadcast to the editor only, filled in with their name and the milestone's numbers, and pays nothing
+- Setting a milestone's message or broadcast previews it straight away
+
+### Fixed
+
+- Test payouts no longer broadcast to the whole server; the tester sees the broadcast instead
+
 ## [1.3.0] - 2026-10-27
 
 ### Changed

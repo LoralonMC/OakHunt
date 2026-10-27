@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * One milestone's rewards, message and broadcast. Shift-click a reward to remove it.
+ * One milestone's rewards, message and broadcast. Shift-click a reward to remove it. Setting the
+ * message or broadcast previews it to the editor straight away.
  */
 public class MilestoneMenu extends Menu {
 
@@ -55,6 +56,7 @@ public class MilestoneMenu extends Menu {
                     if (input != null) {
                         milestone.setMessage(input.equalsIgnoreCase("default") ? null : input);
                         plugin.getHuntManager().saveMilestone(milestone, viewer.getName());
+                        plugin.getRewardService().preview(viewer, hunt, milestone);
                     }
                     plugin.getMenus().openMilestone(viewer, hunt, milestone);
                 }));
@@ -72,17 +74,19 @@ public class MilestoneMenu extends Menu {
                     milestone.setBroadcast(input.equalsIgnoreCase("default")
                             ? plugin.getMessages().manager().getMessageText("default-broadcast") : input);
                     plugin.getHuntManager().saveMilestone(milestone, viewer.getName());
+                    plugin.getRewardService().preview(viewer, hunt, milestone);
                 }
                 plugin.getMenus().openMilestone(viewer, hunt, milestone);
             });
         });
-        set(31, button(Material.EXPERIENCE_BOTTLE, "test-pay"), e -> {
+        set(30, button(Material.SPYGLASS, "preview-messages"), e -> plugin.getRewardService().preview(viewer, hunt, milestone));
+        set(32, button(Material.EXPERIENCE_BOTTLE, "test-pay"), e -> {
             if (!viewer.hasPermission("oakhunt.rewards.pay")) {
                 plugin.getMessages().cmd(viewer, "test-pay-owner-only");
                 return;
             }
             int total = plugin.getHuntManager().liveTotal(hunt);
-            plugin.getRewardService().pay(viewer, hunt, milestone, milestone.isAll() ? total : milestone.getThreshold(), total);
+            plugin.getRewardService().pay(viewer, hunt, milestone, milestone.isAll() ? total : milestone.getThreshold(), total, true);
             plugin.getMessages().cmd(viewer, "test-paid", Messages.text("milestone", plugin.getRewardService().label(milestone)));
         });
         back(27, () -> plugin.getMenus().openRewards(viewer, hunt));
