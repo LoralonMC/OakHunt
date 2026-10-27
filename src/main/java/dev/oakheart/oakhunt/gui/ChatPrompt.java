@@ -3,6 +3,7 @@ package dev.oakheart.oakhunt.gui;
 import dev.oakheart.oakhunt.OakHunt;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickCallback;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -15,6 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.time.Duration;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -64,30 +66,28 @@ public class ChatPrompt implements Listener {
             Session session = sessions.remove(uuid);
             if (session != null) session.callback().accept(null);
         }, TIMEOUT_SECONDS * 20L);
-        sessions.put(uuid, new Session(callback, timeout));
-        player.sendMessage(actions(current));
+        Session session = new Session(callback, timeout);
+        sessions.put(uuid, session);
+        player.sendMessage(actions(uuid, session, current));
     }
 
-    private Component actions(String current) {
+    private Component actions(UUID uuid, Session session, String current) {
         Component paste = Component.empty();
         if (current != null && !current.isBlank() && current.length() <= CHAT_LIMIT) {
             paste = plugin.getMessages().line("commands.prompt-paste")
                     .hoverEvent(HoverEvent.showText(Component.text(current)))
                     .clickEvent(ClickEvent.suggestCommand(current));
         }
-        // A real command rather than a click callback: Pl-Hide only lets allowlisted commands through.
+        // Only ends the prompt it was shown with, so a stale [Cancel] can't end a newer one.
         Component cancel = plugin.getMessages().line("commands.prompt-cancel")
-                .clickEvent(ClickEvent.runCommand("/headhunt cancelprompt"));
+                .clickEvent(ClickEvent.callback(audience -> {
+                    if (sessions.remove(uuid, session)) {
+                        session.timeout().cancel();
+                        session.callback().accept(null);
+                    }
+                }, ClickCallback.Options.builder().uses(1).lifetime(Duration.ofSeconds(TIMEOUT_SECONDS)).build()));
         return plugin.getMessages().line("commands.prompt-actions",
                 Placeholder.component("paste", paste), Placeholder.component("cancel", cancel));
-    }
-
-    /** Ends the player's prompt as if they typed "cancel". */
-    public void abort(Player player) {
-        Session session = sessions.remove(player.getUniqueId());
-        if (session == null) return;
-        session.timeout().cancel();
-        session.callback().accept(null);
     }
 
     public void cancel(UUID uuid) {

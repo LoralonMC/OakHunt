@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.1] - 2026-10-27
+
+### Changed
+
+- [Cancel] in chat prompts is a click callback instead of `/headhunt cancelprompt`, which is removed. A [Cancel] from an earlier prompt no longer ends a newer one
+
 ## [1.5.0] - 2026-10-27
 
 ### Added

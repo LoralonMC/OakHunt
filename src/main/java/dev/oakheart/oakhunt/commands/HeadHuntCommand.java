@@ -138,9 +138,6 @@ public class HeadHuntCommand {
                                     Long at = plugin.getHuntActions().parseFuture(sender, StringArgumentType.getString(ctx, "date"));
                                     if (at != null) plugin.getHuntActions().end(sender, hunt, at);
                                 })))))
-                .then(Commands.literal("cancelprompt")
-                        .requires(placePerm())
-                        .executes(ctx -> player(ctx, p -> plugin.getChatPrompt().abort(p))))
                 .then(Commands.literal("cancel")
                         .requires(perm("oakhunt.manage"))
                         .then(huntArg().executes(ctx -> hunt(ctx, (sender, hunt) -> plugin.getHuntActions().cancel(sender, hunt)))))
