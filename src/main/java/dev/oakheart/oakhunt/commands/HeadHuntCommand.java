@@ -424,8 +424,8 @@ public class HeadHuntCommand {
         for (double d = 0.5; d <= 6; d += 0.25) {
             Location point = eye.clone().add(direction.clone().multiply(d));
             Block block = point.getBlock();
-            Head head = plugin.getHuntManager().headAt(block);
-            if (head != null && head.getHuntId().equals(hunt.getId())) return head;
+            Head head = plugin.getHuntManager().headAt(block, hunt.getId());
+            if (head != null) return head;
             if (block.getType().isOccluding()) return null;
         }
         return null;

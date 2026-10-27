@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-10-27
+
+### Changed
+
+- Hunts can share spots. Placing a head where another hunt has one adds it with a note naming that hunt instead of refusing; only a second head from the same hunt is refused
+- Only one hunt on a shared spot can stand there at a time: starting a hunt while another running hunt holds a shared spot reports that head as blocked, and it is placed automatically when the other hunt ends
+- A leftover head block from a hunt that has ended no longer blocks a running hunt on the same spot
+
 ## [1.2.0] - 2026-10-26
 
 ### Added

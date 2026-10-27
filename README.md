@@ -6,6 +6,7 @@ Head hunts run entirely in-game: built in edit mode, hidden until they start, an
 
 - Hunts are records, not blocks: heads become real blocks only while a hunt is active, and are removed (records kept) when it ends
 - Restart any hunt later in the same spots, as a fresh run or continuing the last one
+- Hunts can reuse each other's spots, as long as they don't run at the same time
 - Start check: blocked spots are skipped, leave the total, and are reported with teleport, remove and force-place buttons
 - Edit mode with previews only the editor sees, numbered labels, sneak + left-click removal and undo
 - Hider role: helpers can hide heads and see the others, but only change their own

@@ -88,6 +88,9 @@ head-removed:
 spot-taken:
   text: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ᴛʜᴀᴛ ꜱᴘᴏᴛ <#C27B6B>ᴀʟʀᴇᴀᴅʏ ʜᴏʟᴅꜱ ᴀ ʜᴇᴀᴅ<#f2ebd7> ꜰʀᴏᴍ <hunt><#f2ebd7>."
   display: chat
+spot-shared:
+  text: "<#6C757D>[<#6B7A5E>ᴏᴀᴋʜᴇᴀʀᴛ<#6C757D>] <#f2ebd7>ᴛʜɪꜱ ꜱᴘᴏᴛ ɪꜱ <#D89B6A>ᴀʟꜱᴏ ᴜꜱᴇᴅ<#f2ebd7> ʙʏ <hunt><#f2ebd7>. ᴏɴʟʏ ᴏɴᴇ ᴏꜰ ᴛʜᴇᴍ ᴄᴀɴ ʙᴇ ʀᴜɴɴɪɴɢ ᴀᴛ ᴀ ᴛɪᴍᴇ."
+  display: chat
 placer-needs-edit:
   text: "<#6C757D>[<#C27B6B>ᴇʀʀᴏʀ<#6C757D>] <#f2ebd7>ᴘʟᴀᴄᴇʀꜱ <#C27B6B>ᴏɴʟʏ ᴡᴏʀᴋ ɪɴ ᴇᴅɪᴛ ᴍᴏᴅᴇ<#f2ebd7>: /headhunt edit <hunt_id>"
   display: chat

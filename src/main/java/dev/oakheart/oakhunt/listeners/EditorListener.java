@@ -1,6 +1,7 @@
 package dev.oakheart.oakhunt.listeners;
 
 import dev.oakheart.oakhunt.OakHunt;
+import dev.oakheart.oakhunt.model.BlockKey;
 import dev.oakheart.oakhunt.model.Head;
 import dev.oakheart.oakhunt.model.Hunt;
 import dev.oakheart.oakhunt.util.Messages;
@@ -50,10 +51,8 @@ public class EditorListener implements Listener {
             return;
         }
 
-        Head occupant = plugin.getHuntManager().headAt(block);
-        if (occupant != null) {
-            plugin.getHuntManager().hunt(occupant.getHuntId()).ifPresent(other ->
-                    plugin.getMessages().send(player, "spot-taken", Messages.hunt(other)));
+        if (plugin.getHuntManager().headAt(block, editing.getId()) != null) {
+            plugin.getMessages().send(player, "spot-taken", Messages.hunt(editing));
             return;
         }
         String texture = placerHunt != null
@@ -68,12 +67,17 @@ public class EditorListener implements Listener {
         // The cancelled placement reverts after this handler; record the head on the next tick so
         // an active hunt's real block isn't wiped by that revert.
         Bukkit.getScheduler().runTask(plugin, () -> {
-            if (plugin.getHuntManager().headAt(block) != null) return;
+            if (plugin.getHuntManager().headAt(block, editing.getId()) != null) return;
             Head head = plugin.getHuntManager().addHead(editing, block, blockData, texture, player.getName());
             plugin.getEditorService().pushUndo(player, head, true);
             plugin.getEditorService().resendSoon(head);
             plugin.getMessages().send(player, "head-added", Messages.hunt(editing),
                     Messages.text("number", head.getNumber()));
+            for (Head other : plugin.getHuntManager().headsAt(BlockKey.of(head))) {
+                if (other == head) continue;
+                plugin.getHuntManager().hunt(other.getHuntId()).ifPresent(otherHunt ->
+                        plugin.getMessages().send(player, "spot-shared", Messages.hunt(otherHunt)));
+            }
         });
     }
 

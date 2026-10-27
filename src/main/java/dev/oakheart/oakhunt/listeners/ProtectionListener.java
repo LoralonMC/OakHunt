@@ -84,7 +84,6 @@ public class ProtectionListener implements Listener {
     }
 
     private boolean isHuntBlock(Block block) {
-        Head head = plugin.getHuntManager().headAt(block);
-        return head != null && plugin.getWorldSync().isOurs(block, head);
+        return plugin.getHuntManager().placedHeadAt(block) != null;
     }
 }

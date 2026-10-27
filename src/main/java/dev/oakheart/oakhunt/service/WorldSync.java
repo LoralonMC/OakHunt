@@ -80,11 +80,11 @@ public class WorldSync {
         Block block = blockIfLoaded(head);
         if (block == null) return;
         Hunt hunt = plugin.getHuntManager().hunt(head.getHuntId()).orElse(null);
-        boolean wanted = hunt != null && hunt.isActive() && head.isLive();
+        boolean wanted = wanted(head);
         boolean ours = isOurs(block, head);
         if (wanted) {
             if (ours) return;
-            if (plugin.getConfigManager().isReplaceable(block.getType())) {
+            if (isFree(block)) {
                 place(block, head);
             } else {
                 markConflict(hunt, head, block.getType());
@@ -92,6 +92,19 @@ public class WorldSync {
         } else if (ours) {
             clear(block);
         }
+    }
+
+    /**
+     * Puts down a blocked head if its spot has since cleared, e.g. the hunt it shared the spot
+     * with just ended. A spot that's still blocked stays a conflict without a second warning.
+     */
+    public void retryConflict(Head head) {
+        Block block = blockIfLoaded(head);
+        if (block == null || !isFree(block)) return;
+        head.setConflict(false);
+        plugin.getHuntManager().saveHead(head);
+        place(block, head);
+        plugin.getEditorService().refreshHead(head);
     }
 
     public void removeFromWorld(Head head) {
@@ -141,12 +154,30 @@ public class WorldSync {
             }
             checks.add(world.getChunkAtAsync(head.getX() >> 4, head.getZ() >> 4).thenApply(chunk -> {
                 Block block = world.getBlockAt(head.getX(), head.getY(), head.getZ());
-                if (isOurs(block, head) || plugin.getConfigManager().isReplaceable(block.getType())) return null;
+                if (isOurs(block, head) || isFree(block)) return null;
                 return new Conflict(head, block.getType());
             }));
         }
         return CompletableFuture.allOf(checks.toArray(CompletableFuture[]::new))
                 .thenApply(v -> checks.stream().map(CompletableFuture::join).filter(c -> c != null).toList());
+    }
+
+    /** Whether a head should stand in the world: its hunt is active and the head is live. */
+    private boolean wanted(Head head) {
+        Hunt hunt = plugin.getHuntManager().hunt(head.getHuntId()).orElse(null);
+        return hunt != null && hunt.isActive() && head.isLive();
+    }
+
+    /**
+     * Whether a head can go here: the block is replaceable, or it's another OakHunt head that
+     * shouldn't be standing (a hunt sharing this spot has ended but its chunk hasn't caught up).
+     */
+    private boolean isFree(Block block) {
+        if (plugin.getConfigManager().isReplaceable(block.getType())) return true;
+        Integer id = headIdAt(block);
+        if (id == null) return false;
+        Head other = plugin.getHuntManager().headIncludingArchived(id).orElse(null);
+        return other == null || !wanted(other);
     }
 
     public boolean isOurs(Block block, Head head) {

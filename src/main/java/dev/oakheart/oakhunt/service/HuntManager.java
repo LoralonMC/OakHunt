@@ -46,7 +46,8 @@ public class HuntManager {
     private final Map<String, Hunt> hunts = new LinkedHashMap<>();
     private final Map<Integer, Head> heads = new HashMap<>();
     private final Map<String, List<Head>> headsByHunt = new HashMap<>();
-    private final Map<BlockKey, Head> headsByBlock = new HashMap<>();
+    /** Hunts may share a spot; only one of them can be live at a time. */
+    private final Map<BlockKey, List<Head>> headsByBlock = new HashMap<>();
     private final Map<String, Map<Long, List<Head>>> headsByChunk = new HashMap<>();
     private final Map<String, List<Skin>> skinsByHunt = new HashMap<>();
     private final Map<Integer, Skin> skins = new HashMap<>();
@@ -207,12 +208,22 @@ public class HuntManager {
                 db.saveHead(head);
             }
         }
-        plugin.getWorldSync().syncHunt(hunt);
+        plugin.getWorldSync().syncHunt(hunt).thenRun(() -> releaseSharedSpots(hunt));
         plugin.getEditorService().refreshHunt(hunt);
         db.audit(actor, hunt.getId(), "end", null);
         plugin.getMessages().send(Bukkit.getConsoleSender(), "hunt-ended-log", Messages.hunt(hunt));
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.hasPermission("oakhunt.use")) plugin.getMessages().send(player, "hunt-ended", Messages.hunt(hunt));
+        }
+    }
+
+    /** Puts down other active hunts' heads that were blocked only by this hunt's heads on shared spots. */
+    private void releaseSharedSpots(Hunt hunt) {
+        for (Head head : heads(hunt)) {
+            for (Head other : headsAt(BlockKey.of(head))) {
+                if (other == head || !other.isConflict()) continue;
+                hunt(other.getHuntId()).filter(Hunt::isActive).ifPresent(h -> plugin.getWorldSync().retryConflict(other));
+            }
         }
     }
 
@@ -296,12 +307,29 @@ public class HuntManager {
         return Optional.ofNullable(heads.get(id));
     }
 
-    public Head headAt(Block block) {
-        return headsByBlock.get(BlockKey.of(block));
+    /** Every non-archived head on this spot, one per hunt at most. */
+    public List<Head> headsAt(BlockKey key) {
+        return List.copyOf(headsByBlock.getOrDefault(key, List.of()));
     }
 
-    public Head headAt(BlockKey key) {
-        return headsByBlock.get(key);
+    /** The given hunt's head on this spot, or null. */
+    public Head headAt(Block block, String huntId) {
+        return headAt(BlockKey.of(block), huntId);
+    }
+
+    public Head headAt(BlockKey key, String huntId) {
+        for (Head head : headsByBlock.getOrDefault(key, List.of())) {
+            if (head.getHuntId().equals(huntId)) return head;
+        }
+        return null;
+    }
+
+    /** The head whose real block stands here (the skull carries its id), or null. */
+    public Head placedHeadAt(Block block) {
+        Integer id = plugin.getWorldSync().headIdAt(block);
+        if (id == null) return null;
+        Head head = heads.get(id);
+        return head != null && !head.isArchived() && BlockKey.of(head).equals(BlockKey.of(block)) ? head : null;
     }
 
     public List<Head> headsInChunk(String world, int chunkX, int chunkZ) {
@@ -336,7 +364,7 @@ public class HuntManager {
     public void archiveHead(Head head, String actor) {
         plugin.getWorldSync().removeFromWorld(head);
         head.setArchived(true);
-        headsByBlock.remove(BlockKey.of(head), head);
+        unindexBlock(head);
         db.saveHead(head);
         db.audit(actor, head.getHuntId(), "remove-head", "#" + head.getNumber());
         plugin.getEditorService().refreshHead(head);
@@ -345,11 +373,11 @@ public class HuntManager {
     /**
      * Brings back an archived head (undo).
      *
-     * @return false if its spot now holds another hunt's head
+     * @return false if its spot now holds another head of the same hunt
      */
     public boolean restoreHead(Head head, String actor) {
         BlockKey key = BlockKey.of(head);
-        Head occupant = headsByBlock.get(key);
+        Head occupant = headAt(key, head.getHuntId());
         if (occupant != null && occupant != head) return false;
         if (headsByHunt.getOrDefault(head.getHuntId(), List.of()).stream()
                 .anyMatch(other -> other != head && !other.isArchived() && other.getNumber() == head.getNumber())) {
@@ -357,7 +385,7 @@ public class HuntManager {
             headsByHunt.get(head.getHuntId()).sort(Comparator.comparingInt(Head::getNumber));
         }
         head.setArchived(false);
-        headsByBlock.put(key, head);
+        headsByBlock.computeIfAbsent(key, k -> new ArrayList<>()).add(head);
         db.saveHead(head);
         db.audit(actor, head.getHuntId(), "restore-head", "#" + head.getNumber());
         plugin.getWorldSync().reconcile(head);
@@ -402,7 +430,15 @@ public class HuntManager {
         list.sort(Comparator.comparingInt(Head::getNumber));
         headsByChunk.computeIfAbsent(head.getWorld(), k -> new HashMap<>())
                 .computeIfAbsent(head.chunkKey(), k -> new ArrayList<>()).add(head);
-        if (!head.isArchived()) headsByBlock.put(BlockKey.of(head), head);
+        if (!head.isArchived()) headsByBlock.computeIfAbsent(BlockKey.of(head), k -> new ArrayList<>()).add(head);
+    }
+
+    private void unindexBlock(Head head) {
+        BlockKey key = BlockKey.of(head);
+        List<Head> list = headsByBlock.get(key);
+        if (list == null) return;
+        list.remove(head);
+        if (list.isEmpty()) headsByBlock.remove(key);
     }
 
     // ---------------------------------------------------------------- skins

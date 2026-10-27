@@ -39,11 +39,15 @@ public class HeadListener implements Listener {
         if (action != Action.LEFT_CLICK_BLOCK && action != Action.RIGHT_CLICK_BLOCK) return;
         Block block = event.getClickedBlock();
         if (block == null) return;
-        Head head = plugin.getHuntManager().headAt(block);
+        Player player = event.getPlayer();
+        // An editor's own hunt comes first on a shared spot; otherwise it's whichever head stands here.
+        Head head = plugin.getEditorService().editing(player)
+                .map(editingHunt -> plugin.getHuntManager().headAt(block, editingHunt.getId()))
+                .orElse(null);
+        if (head == null) head = plugin.getHuntManager().placedHeadAt(block);
         if (head == null) return;
         Hunt hunt = plugin.getHuntManager().hunt(head.getHuntId()).orElse(null);
         if (hunt == null) return;
-        Player player = event.getPlayer();
         boolean editing = plugin.getEditorService().isEditing(player, hunt.getId());
         // A conflicted spot holds someone else's block: leave it alone.
         if (!editing && !plugin.getWorldSync().isOurs(block, head)) return;
