@@ -69,9 +69,16 @@ public class WorldSync {
                 .thenApply(v -> (int) heads.stream().filter(Head::isConflict).count());
     }
 
+    /**
+     * Reconciles every head indexed in the chunk, removed ones included: a head removed while its
+     * chunk was unloaded could not be cleared then, and skipping it here left its skull standing for
+     * good, unprotected and breakable for the hunt's custom head (Plugin Review 2026-11-01, G3-04).
+     * A removed head is never wanted, so {@link #reconcile} clears its block, and only if that block
+     * still carries the removed head's own id.
+     */
     public void reconcileChunk(Chunk chunk) {
         for (Head head : plugin.getHuntManager().headsInChunk(chunk.getWorld().getName(), chunk.getX(), chunk.getZ())) {
-            if (!head.isArchived()) reconcile(head);
+            reconcile(head);
         }
     }
 
