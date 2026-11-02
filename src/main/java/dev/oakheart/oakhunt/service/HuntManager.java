@@ -55,6 +55,8 @@ public class HuntManager {
     private final Map<Integer, Run> runs = new HashMap<>();
     private final Map<String, List<Milestone>> milestonesByHunt = new HashMap<>();
     private final Map<Integer, Milestone> milestones = new HashMap<>();
+    /** Threshold per milestone id, archived milestones included (see {@link #thresholdOf}). */
+    private final Map<Integer, Integer> milestoneThresholds = new HashMap<>();
 
     private BukkitTask scheduleTask;
 
@@ -76,6 +78,7 @@ public class HuntManager {
             runs.put(run.getId(), run);
             runsByHunt.computeIfAbsent(run.getHuntId(), k -> new ArrayList<>()).add(run);
         }
+        milestoneThresholds.putAll(db.loadMilestoneThresholds());
         for (Milestone milestone : db.loadMilestones()) {
             milestones.put(milestone.getId(), milestone);
             milestonesByHunt.computeIfAbsent(milestone.getHuntId(), k -> new ArrayList<>()).add(milestone);
@@ -501,6 +504,11 @@ public class HuntManager {
         return Optional.ofNullable(milestones.get(id));
     }
 
+    /** The threshold a milestone id paid at, even after the milestone was removed; null if unknown. */
+    public Integer thresholdOf(int milestoneId) {
+        return milestoneThresholds.get(milestoneId);
+    }
+
     /**
      * @return the new milestone, or empty if one with this threshold already exists
      */
@@ -510,6 +518,7 @@ public class HuntManager {
         }
         Milestone milestone = new Milestone(db.nextId("milestones"), hunt.getId(), threshold, null, null);
         milestones.put(milestone.getId(), milestone);
+        milestoneThresholds.put(milestone.getId(), threshold);
         List<Milestone> list = milestonesByHunt.computeIfAbsent(hunt.getId(), k -> new ArrayList<>());
         list.add(milestone);
         list.sort(Comparator.comparingInt(Milestone::sortKey));

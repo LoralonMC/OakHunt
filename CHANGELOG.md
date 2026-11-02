@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.1] - 2026-11-02
+
+### Fixed
+- Removing a milestone and adding one back at the same threshold (to rebuild its rewards, or across two edit-file applies) paid every player already past it again on their next find or login. A payout now counts for its threshold within the run, so a re-created milestone is recognised as already paid. A milestone at a new threshold still pays the players already past it (Plugin Review 2026-11-01, G3-05).
+
 ## [1.6.0] - 2026-10-27
 
 ### Added

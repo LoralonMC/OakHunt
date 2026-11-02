@@ -3,6 +3,7 @@ package dev.oakheart.oakhunt.service;
 import dev.oakheart.oakhunt.OakHunt;
 import dev.oakheart.oakhunt.model.Head;
 import dev.oakheart.oakhunt.model.Hunt;
+import dev.oakheart.oakhunt.model.Milestone;
 import dev.oakheart.oakhunt.model.PlayerResult;
 import dev.oakheart.oakhunt.model.Run;
 import dev.oakheart.oakhunt.storage.HuntDatabase;
@@ -186,9 +187,24 @@ public class ProgressService {
         return ranking(run).size();
     }
 
-    public boolean hasPaid(Run run, UUID uuid, int milestoneId) {
+    /**
+     * Whether the player was paid this milestone in this run, or any milestone at the same threshold:
+     * removing a milestone and adding one back at the same threshold (to rebuild its rewards, or via
+     * two edit-file applies) creates a new id, and keying on the id alone paid every player already
+     * past it a second time (Plugin Review 2026-11-01, G3-05). A run belongs to one hunt, so a
+     * threshold is unambiguous within it. A milestone at a genuinely new threshold still pays the
+     * players already past it, as it always has.
+     */
+    public boolean hasPaid(Run run, UUID uuid, Milestone milestone) {
         Map<UUID, Set<Integer>> runPayouts = payouts.get(run.getId());
-        return runPayouts != null && runPayouts.getOrDefault(uuid, Set.of()).contains(milestoneId);
+        if (runPayouts == null) return false;
+        Set<Integer> paid = runPayouts.getOrDefault(uuid, Set.of());
+        if (paid.contains(milestone.getId())) return true;
+        for (int id : paid) {
+            Integer threshold = plugin.getHuntManager().thresholdOf(id);
+            if (threshold != null && threshold == milestone.getThreshold()) return true;
+        }
+        return false;
     }
 
     public void markPaid(Run run, UUID uuid, int milestoneId) {

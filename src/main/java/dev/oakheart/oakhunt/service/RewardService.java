@@ -40,7 +40,7 @@ public class RewardService {
         int total = plugin.getHuntManager().liveTotal(hunt);
         for (Milestone milestone : plugin.getHuntManager().milestones(hunt)) {
             if (!milestone.isReached(found, total)) continue;
-            if (plugin.getProgressService().hasPaid(run, player.getUniqueId(), milestone.getId())) continue;
+            if (plugin.getProgressService().hasPaid(run, player.getUniqueId(), milestone)) continue;
             plugin.getProgressService().markPaid(run, player.getUniqueId(), milestone.getId());
             pay(player, hunt, milestone, found, total);
             plugin.getDatabase().audit(player.getName(), hunt.getId(), "payout",

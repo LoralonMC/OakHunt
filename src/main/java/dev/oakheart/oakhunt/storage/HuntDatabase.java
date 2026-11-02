@@ -208,6 +208,21 @@ public class HuntDatabase {
         return runs;
     }
 
+    /**
+     * The threshold of every milestone ever created, archived ones included: a payout row names its
+     * milestone by id, and a removed milestone's id must still say which threshold it paid.
+     */
+    public synchronized Map<Integer, Integer> loadMilestoneThresholds() throws SQLException {
+        Map<Integer, Integer> thresholds = new HashMap<>();
+        try (Statement st = connection.createStatement();
+             ResultSet rs = st.executeQuery("SELECT id, threshold FROM milestones")) {
+            while (rs.next()) {
+                thresholds.put(rs.getInt("id"), rs.getInt("threshold"));
+            }
+        }
+        return thresholds;
+    }
+
     public synchronized List<Milestone> loadMilestones() throws SQLException {
         Map<Integer, Milestone> byId = new HashMap<>();
         List<Milestone> milestones = new ArrayList<>();

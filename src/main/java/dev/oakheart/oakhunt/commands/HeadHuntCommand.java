@@ -556,7 +556,7 @@ public class HeadHuntCommand {
                         int total = plugin.getHuntManager().liveTotal(hunt);
                         plugin.getHuntManager().milestones(hunt).stream()
                                 .filter(m -> m.isReached(found, total))
-                                .filter(m -> !plugin.getProgressService().hasPaid(run, player.getUniqueId(), m.getId()))
+                                .filter(m -> !plugin.getProgressService().hasPaid(run, player.getUniqueId(), m))
                                 .forEach(m -> plugin.getProgressService().markPaid(run, player.getUniqueId(), m.getId()));
                     }
                     plugin.getMessages().cmd(s, pay && online == null ? "player-granted-offline" : "player-granted",
